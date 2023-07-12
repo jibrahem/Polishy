@@ -31,7 +31,7 @@ module.exports = {
         price: 12.99,
         image: 'https://i.etsystatic.com/6840190/r/il/f3b1aa/2370282725/il_1588xN.2370282725_1i8a.jpg'
       }
-    ])
+    ], {})
   },
 
   async down(queryInterface, Sequelize) {
