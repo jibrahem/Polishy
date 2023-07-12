@@ -18,12 +18,12 @@ module.exports = {
       polishId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Polishes' }
+        // references: { model: 'Polishes' }
       },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Users' }
+        // references: { model: 'Users' }
       },
       review: {
         allowNull: false,
