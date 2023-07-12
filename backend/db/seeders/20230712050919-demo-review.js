@@ -28,7 +28,7 @@ module.exports = {
         image: 'polish.jpg'
       },
       {
-        polishId: 2,
+        polishId: 1,
         userId: 1,
         review: 'It was pretty but not exactly like the picture',
         stars: 3,
@@ -42,7 +42,7 @@ module.exports = {
         image: 'polish.jpg'
       },
       {
-        polishId: 2,
+        polishId: 1,
         userId: 3,
         review: 'It came broken',
         stars: 1,
