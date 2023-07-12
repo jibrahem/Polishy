@@ -30,16 +30,25 @@ function Navigation({ isLoaded }) {
 
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Polishy</NavLink>
-            </li>
-            {isLoaded && (
+        <nav>
+            <ul>
                 <li>
-                    <ProfileButton user={sessionUser} />
+                    <div className='polishy'>
+                        <NavLink exact to="/">Polishy</NavLink>
+                    </div>
                 </li>
-            )}
-        </ul>
+                <div className='cart_profile'>
+                    {isLoaded && (
+                        <li>
+                            <ProfileButton user={sessionUser} />
+                        </li>
+                    )}
+                    <div className='cart'>
+                        <li><i class="fa-solid fa-cart-shopping"></i></li>
+                    </div>
+                </div>
+            </ul>
+        </nav>
     );
 }
 

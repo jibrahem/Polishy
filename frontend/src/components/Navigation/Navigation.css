@@ -1,3 +1,52 @@
 .hidden{
     display: none;
 }
+
+ul li{
+    list-style: none;
+}
+.polishy a{
+    color: rgb(255, 111, 0);
+}
+.polishy{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 38px;
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+nav{
+    margin: 1rem;
+    border-bottom: 1px solid gray;
+
+}
+
+.cart_profile{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+
+.signin button{
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    height: 2rem;
+    width: 4.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.signin button:hover{
+    background-color: rgb(233, 241, 241);
+}
+
+.cart{
+    cursor: pointer;
+}

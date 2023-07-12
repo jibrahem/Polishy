@@ -1,0 +1,25 @@
+.polish a:hover {
+    text-decoration: none;
+}
+
+.front-image{
+    margin: 1rem;
+}
+
+.front-image ul img{
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+}
+
+.front-image li{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.top-text{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}

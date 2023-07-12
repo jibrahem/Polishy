@@ -13,12 +13,10 @@ export const recievePolish = (polish) => ({
 });
 
 export const allPolishesThunk = () => async (dispatch) => {
-    console.log('in tht ehunk')
     const res = await fetch('/api/polishes')
 
     if (res.ok) {
         const polishes = await res.json()
-        console.log('polsihes in thunk', polishes)
         dispatch(getAllPolishes(polishes))
     }
 }
@@ -27,7 +25,6 @@ export const getOnePolishThunk = (polishId) => async (dispatch) => {
     const res = await fetch(`/api/polishes/${polishId}`)
     if (res.ok) {
         const polish = await res.json();
-        console.log('single polish', polish)
         dispatch(recievePolish(polish))
         return polish
     } else {
