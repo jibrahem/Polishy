@@ -9,9 +9,9 @@ const router = express.Router();
 //GET ALL POLISHES
 router.get('/', async (req, res) => {
     const allPolishes = await Polish.findAll({
-        // include: [
-        //     { model: Review }
-        // ]
+        include: [
+            { model: Review }
+        ]
     })
     return res.json(allPolishes)
 })

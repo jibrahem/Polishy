@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Polish.belongsTo(models.User, { foreignKey: 'userId', as: 'Seller' });
+      Polish.hasMany(models.Review, { foreignKey: 'polishId', hooks: true, onDelete: 'CASCADE' });
     }
   }
   Polish.init({
