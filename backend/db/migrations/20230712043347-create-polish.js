@@ -5,6 +5,8 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
+options.tableName = "Polishes";
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -45,7 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Polishes";
     await queryInterface.dropTable(options);
   }
 };
