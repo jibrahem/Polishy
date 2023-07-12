@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PolishList from "./components/PolishList";
+import PolishShow from "./components/PolishShow";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,9 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
+        <Route exact path={'/polishes/:polishId'}>
+          <PolishShow/>
+        </Route>
         <Route exact path={'/'}>
           <PolishList />
         </Route>

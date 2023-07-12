@@ -22,7 +22,7 @@ function PolishList() {
                 <ul>
                     {polishList.length > 0 && polishList.map(polish => (
                         <div key={polish.id} className='polish'>
-                            <Link to={`/polishes/${polish.id}`}></Link>
+                            <Link to={`/polishes/${polish.id}`}>
                             <div className='img'>
                                 <img src={polish.image} alt='polish'></img>
                             </div>
@@ -32,6 +32,7 @@ function PolishList() {
                             <div className='price'>
                                 <div>{polish.price}</div>
                             </div>
+                            </Link>
                         </div>
                     ))}
                 </ul>
