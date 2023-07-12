@@ -24,25 +24,29 @@ module.exports = {
         polishId: 1,
         userId: 3,
         review: 'Such a beautiful color',
-        stars: 5
+        stars: 5,
+        image: 'polish.jpg'
       },
       {
         polishId: 2,
         userId: 1,
         review: 'It was pretty but not exactly like the picture',
-        stars: 3
+        stars: 3,
+        image: 'polish.jpg'
       },
       {
         polishId: 1,
         userId: 2,
         review: 'Really nice',
-        stars: 4
+        stars: 4,
+        image: 'polish.jpg'
       },
       {
         polishId: 2,
         userId: 3,
         review: 'It came broken',
-        stars: 1
+        stars: 1,
+        image: 'polish.jpg'
       },
     ])
   },
