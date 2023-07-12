@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
-export const GET_ALL_POLISHES = 'spots/GET_ALL_POLISHES';
-export const RECEIVE_POLISH = 'spots/RECEIVE_POLISH';
+export const GET_ALL_POLISHES = 'polishes/GET_ALL_POLISHES';
+export const RECEIVE_POLISH = 'polishes/RECEIVE_POLISH';
 
 export const getAllPolishes = (polishes) => ({
     type: GET_ALL_POLISHES,
