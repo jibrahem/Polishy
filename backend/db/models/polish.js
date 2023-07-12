@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   Polish.init({
     userId:{
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: { model: 'Users' }
     },
     description: {
       allowNull: false,

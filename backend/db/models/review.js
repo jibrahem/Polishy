@@ -19,10 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     polishId: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      references: { model: 'Polishes' }
     },
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      references: { model: 'Users' }
     },
     review: {
       allowNull: false,
