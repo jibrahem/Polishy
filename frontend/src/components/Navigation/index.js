@@ -30,25 +30,41 @@ function Navigation({ isLoaded }) {
 
 
     return (
-        <nav>
-            <ul>
-                <li>
-                    <div className='polishy'>
-                        <NavLink exact to="/">Polishy</NavLink>
+        <div className='nav-wrap'>
+            <nav>
+                <ul>
+                    <li>
+                        <div className='polishy'>
+                            <NavLink exact to="/">Polishy</NavLink>
+                        </div>
+                    </li>
+                    <li>
+                        <div className='search'>
+                            <input type="search"
+                                placeholder='   Search for anything'
+                            />
+                            <button type='submit'>
+                                <i class="fa-solid fa-magnifying-glass">
+                            </i></button>
+                        </div>
+                    </li>
+                    <div className='cart_profile'>
+                        {isLoaded && (
+                            <li>
+                                <ProfileButton user={sessionUser} />
+                            </li>
+                        )}
+                        <div className='cart'>
+                            <li>
+                                <button>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </li>
+                        </div>
                     </div>
-                </li>
-                <div className='cart_profile'>
-                    {isLoaded && (
-                        <li>
-                            <ProfileButton user={sessionUser} />
-                        </li>
-                    )}
-                    <div className='cart'>
-                        <li><i class="fa-solid fa-cart-shopping"></i></li>
-                    </div>
-                </div>
-            </ul>
-        </nav>
+                </ul>
+            </nav>
+        </div>
     );
 }
 

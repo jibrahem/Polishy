@@ -30,12 +30,14 @@ export const deleteReview = (review) => ({
     review,
 })
 
-export const getPolishReviewsThunk = (polish) => async (dispatch) => {
-    const res = await fetch(`/api/polishes/${polish.id}/reviews`)
+export const getPolishReviewsThunk = (polishId) => async (dispatch) => {
+    console.log('WE ARE IN THE THUNK')
+    const res = await fetch(`/api/polishes/${polishId}/reviews`)
 
     if (res.ok) {
-        const polishes = await res.json()
-        dispatch(getPolishReviews(polishes))
+        const reviews = await res.json()
+        dispatch(getPolishReviews(reviews))
+        return reviews
     }
 }
 
@@ -56,6 +58,7 @@ export const createReviewThunk = (review, polish, user) => async (dispatch) => {
     })
     if (res.ok) {
         const review = await res.json()
+        review.User = user
         dispatch(createReview(review))
         return review
     } else {

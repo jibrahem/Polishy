@@ -42,7 +42,6 @@ function PolishList() {
                                     <img src={polish.image} alt='polish'></img>
                                 </div>
                                 <div className='desc'>
-                                    <div>{polish.description}</div>
                                 </div>
                                 <div className='price'>
                                     <div>{polish.price}</div>

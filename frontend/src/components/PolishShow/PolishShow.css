@@ -1,8 +1,13 @@
-img{
-    height: 100px;
-    width: 100px;
+.polish-box img{
+    height: 500px;
+    width:500px;
+    border-radius: 7px;
 }
 
 main{
     margin: 1rem;
+}
+
+section{
+    margin:1rem;
 }

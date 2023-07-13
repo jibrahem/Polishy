@@ -58,7 +58,7 @@ router.get('/:polishId/reviews', async (req, res) => {
         include: [
             {
                 model: User,
-                attributes: ['id', 'firstName', 'image']
+                attributes: ['id', 'firstName']
             }
         ]
     });

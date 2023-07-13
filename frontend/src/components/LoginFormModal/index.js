@@ -52,6 +52,14 @@ function LoginFormModal() {
             });
     };
 
+    const demo = () =>{
+        return dispatch(sessionActions.login({
+            credential: 'raven@aa.io',
+            password: 'password'
+        }))
+        .then(closeModal)
+    }
+
     return (
         <>
             <h1>Sign In</h1>
@@ -84,6 +92,7 @@ function LoginFormModal() {
                 )}
                 <button type="submit">Log In</button>
             </form>
+            <button onClick={demo}>Demo User</button>
         </>
     );
 }
