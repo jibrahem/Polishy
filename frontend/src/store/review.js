@@ -125,7 +125,6 @@ const reviewReducer = (state = initialState, action) => {
             return newState
         default:
             return state
-
     }
 }
 
