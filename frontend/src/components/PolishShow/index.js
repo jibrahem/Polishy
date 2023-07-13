@@ -9,6 +9,7 @@ import OpenModalMenuItem from '../../components/Navigation/OpenModalMenuItem'
 import DeleteReview from "../DeleteReview";
 import { useRef } from "react";
 import CreateReview from "../CreateReview";
+import UpdateReview from "../UpdateReview";
 
 
 const PolishShow = () => {
@@ -85,6 +86,14 @@ const PolishShow = () => {
                                     onItemClick={closeMenu}
                                     modalComponent={<DeleteReview
                                         review={review}
+                                        polish={polish}
+                                    />}
+                                />
+                                <OpenModalMenuItem
+                                    buttonText="Update"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<UpdateReview
+                                        newReview={review}
                                         polish={polish}
                                     />}
                                 />

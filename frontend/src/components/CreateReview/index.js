@@ -16,8 +16,6 @@ const CreateReview = ({ polish }) => {
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
 
-    console.log('polish, ', polish)
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         const newReview = {
