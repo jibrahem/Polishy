@@ -28,7 +28,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
     let reviewList = [];
     for (let i = 0; i < Reviews.length; i++) {
-        const review = Review[i]
+        const review = Reviews[i]
         reviewList.push(review.toJSON())
     }
     return res.json({ Reviews: reviewList })

@@ -5,6 +5,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PolishList from "./components/PolishList";
 import PolishShow from "./components/PolishShow";
+import UpdateReview from "./components/UpdateReview";
+import ManageReviews from "./components/ManageReviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,12 +20,15 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
         <Route exact path={'/polishes/:polishId'}>
-          <PolishShow/>
+          <PolishShow />
+        </Route>
+        <Route exact path={'/reviews/current'}>
+          <ManageReviews />
         </Route>
         <Route exact path={'/'}>
           <PolishList />
         </Route>
-        </Switch>}
+      </Switch>}
     </>
   );
 }

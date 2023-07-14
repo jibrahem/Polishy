@@ -28,21 +28,21 @@ module.exports = {
         image: 'polish.jpg'
       },
       {
-        polishId: 1,
+        polishId: 2,
         userId: 1,
         review: 'It was pretty but not exactly like the picture',
         stars: 3,
         image: 'polish.jpg'
       },
       {
-        polishId: 1,
+        polishId: 3,
         userId: 2,
         review: 'Really nice',
         stars: 4,
         image: 'polish.jpg'
       },
       {
-        polishId: 1,
+        polishId: 4,
         userId: 3,
         review: 'It came broken',
         stars: 1,

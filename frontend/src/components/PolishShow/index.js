@@ -79,37 +79,19 @@ const PolishShow = () => {
                         <div>{review.stars}</div>
                         <div>{review.User.firstName}</div>
                         <div>{review.createdAt}</div>
-                        {userReview && userId && review.userId === userId &&
-                            <div className="modal">
-                                <OpenModalMenuItem
-                                    buttonText="Delete"
-                                    onItemClick={closeMenu}
-                                    modalComponent={<DeleteReview
-                                        review={review}
-                                        polish={polish}
-                                    />}
-                                />
-                                <OpenModalMenuItem
-                                    buttonText="Update"
-                                    onItemClick={closeMenu}
-                                    modalComponent={<UpdateReview
-                                        newReview={review}
-                                        polish={polish}
-                                    />}
-                                />
-                            </div>
-                        }
+
 
                     </div>
                 ))}
             </div>
-            <OpenModalMenuItem
-                buttonText="Add Review"
-                onItemClick={closeMenu}
-                modalComponent={<CreateReview
-                    polish={polish}
+            {!userReview && userId &&
+                <OpenModalMenuItem
+                    buttonText="Add Review"
+                    onItemClick={closeMenu}
+                    modalComponent={<CreateReview
+                        polish={polish}
+                    />}
                 />}
-            />
 
         </section>
     )

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
-import { getOnePolishThunk } from '../../store/polish'
+import { getAllUserReviewsThunk } from '../../store/review'
 import { updateReviewThunk } from '../../store/review'
 import { useHistory } from 'react-router-dom'
 
 const UpdateReview = ({ polish, updateReview }) => {
-    console.log('newreview', updateReview)
+    console.log('review', updateReview)
     const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
@@ -37,7 +37,7 @@ const UpdateReview = ({ polish, updateReview }) => {
             setErrors(errors)
         } else {
             const updatedReview = await dispatch(updateReviewThunk(newReview))
-            await dispatch(getOnePolishThunk(polish.id))
+            await dispatch(getAllUserReviewsThunk())
                 .then(closeModal)
         }
         if (!updateReview) {

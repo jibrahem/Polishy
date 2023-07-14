@@ -109,7 +109,7 @@ const reviewReducer = (state = initialState, action) => {
         case GET_USER_REVIEWS:
             newState = { ...state, polish: { ...state.polish }, user: { ...state.user } }
             action.reviews.Reviews.forEach(review => {
-                newState.polish[review.id] = review
+                newState.user[review.id] = review
             })
             return newState
         case UPDATE_REVIEW:
