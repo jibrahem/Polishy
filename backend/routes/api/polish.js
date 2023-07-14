@@ -103,6 +103,7 @@ router.post('/:polishId/reviews', requireAuth, async (req, res) => {
     const newReview = await Review.create({
         polishId: polish.id,
         userId: user.id,
+        image: image,
         review,
         stars
     })

@@ -37,7 +37,7 @@ router.get('/current', requireAuth, async (req, res) => {
 //UPDATE a users review
 router.put('/:reviewId', requireAuth, async (req, res) => {
     const { user } = req;
-    const { review, stars } = req.body
+    const { review, stars, image } = req.body
     const editReview = await Review.findByPk(req.params.reviewId);
     if (!editReview) {
         return res.status(404).json({
@@ -65,6 +65,9 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     }
     if(review){
         editReview.review = review;
+    }
+    if (image) {
+        editReview.image = image;
     }
     if(stars){
         editReview.stars = stars;

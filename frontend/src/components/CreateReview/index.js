@@ -12,6 +12,7 @@ const CreateReview = ({ polish }) => {
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(1)
+    const [image, setImage] = useState('image.jpg')
     const [errors, setErrors] = useState({})
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
@@ -21,6 +22,7 @@ const CreateReview = ({ polish }) => {
         const newReview = {
             polishId: polish.id,
             userId: user.id,
+            image: image,
             review: review,
             stars: stars
         }
@@ -59,6 +61,10 @@ const CreateReview = ({ polish }) => {
                     onChange={(e) => setReview(e.target.value)}
                     placeholder='Leave your review'
                     />
+                    <input type='text'
+                        onChange={(e) => setImage(e.target.value) }
+                    >
+                    </input>
             <div className='errors'>{errors.stars}</div>
             <button type='submit'>Submit Review</button>
             </form>

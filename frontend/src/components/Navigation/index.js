@@ -28,6 +28,10 @@ function Navigation({ isLoaded }) {
 
     const closeMenu = () => setShowMenu(false);
 
+    const onClick = () =>{
+        history.push('/carts')
+    }
+
 
     return (
         <div className='nav-wrap'>
@@ -56,7 +60,7 @@ function Navigation({ isLoaded }) {
                         )}
                         <div className='cart'>
                             <li>
-                                <button>
+                                <button onClick={onClick}>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </button>
                             </li>

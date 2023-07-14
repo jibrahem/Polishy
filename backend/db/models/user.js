@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Polish, { foreignKey: 'userId', hooks: true, onDelete: 'CASCADE' });
       User.hasMany(models.Review, { foreignKey: 'userId', hooks: true, onDelete: 'CASCADE' });
-      // User.hasOne(models.Cart, { foreignKey: 'userId', hooks: true, onDelete: 'CASCADE' });
+      User.hasOne(models.Cart, { foreignKey: 'userId', hooks: true, onDelete: 'CASCADE' });
     }
   };
 

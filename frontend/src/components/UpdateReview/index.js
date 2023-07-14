@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
-import { getAllUserReviewsThunk } from '../../store/review'
+import { getAllUserReviewsThunk, updateReview } from '../../store/review'
 import { updateReviewThunk } from '../../store/review'
 import { useHistory } from 'react-router-dom'
 
-const UpdateReview = ({ polish, updateReview }) => {
-    console.log('review', updateReview)
+const UpdateReview = ({ polish, review }) => {
+    console.log('review in update', review)
     const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
-    const [review, setReview] = useState(updateReview?.review)
+    const [text, setText] = useState(review?.review)
+    const [image, setImage] = useState('image.jpg')
     const [stars, setStars] = useState(1)
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal()
@@ -18,16 +19,18 @@ const UpdateReview = ({ polish, updateReview }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const newReview = {
-            ...updateReview,
+            ...review,
             polishId: polish.id,
             userId: user.id,
-            review: review,
+            image: image,
+            review: text,
             stars: stars
         }
+        console.log('new review', newReview)
         const errors = {}
 
-        if (!review) {
-            errors.review = 'Review text is required'
+        if (!text) {
+            errors.text = 'Review text is required'
         }
         if (!stars) {
             errors.stars = "Star rating is required"
@@ -40,7 +43,7 @@ const UpdateReview = ({ polish, updateReview }) => {
             await dispatch(getAllUserReviewsThunk())
                 .then(closeModal)
         }
-        if (!updateReview) {
+        if (!review) {
             return null
         }
         if (!polish) {
@@ -54,8 +57,8 @@ const UpdateReview = ({ polish, updateReview }) => {
                 <form onSubmit={handleSubmit}>
                     <div className='errors'>{errors.review}</div>
                     <textarea
-                        value={review}
-                        onChange={(e) => setReview(e.target.value)}
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
                     />
                     <div className='errors'>{errors.stars}</div>
                     <button type='submit'>Update Review</button>

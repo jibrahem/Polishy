@@ -7,6 +7,7 @@ import PolishList from "./components/PolishList";
 import PolishShow from "./components/PolishShow";
 import UpdateReview from "./components/UpdateReview";
 import ManageReviews from "./components/ManageReviews";
+import CartShow from "./components/CartShow";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path={'/reviews/current'}>
           <ManageReviews />
+        </Route>
+        <Route exact path={'/carts'}>
+          <CartShow />
         </Route>
         <Route exact path={'/'}>
           <PolishList />

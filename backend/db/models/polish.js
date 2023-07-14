@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Polish.belongsTo(models.User, { foreignKey: 'userId', as: 'Seller' });
       Polish.hasMany(models.Review, { foreignKey: 'polishId', hooks: true, onDelete: 'CASCADE' });
-      // Polish.belongsTo(models.Cart, { foreignKey: 'polishId'});
+      Polish.belongsToMany(models.Cart, {
+        through: 'PolishCart',
+        otherKey: 'cartId',
+        foreignKey: 'polishId', onDelete: 'CASCADE'
+      })
     }
   }
   Polish.init({

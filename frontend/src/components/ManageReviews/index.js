@@ -8,15 +8,15 @@ import UpdateReview from '../UpdateReview'
 function ManageReviews() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-
-    console.log('userssss', user)
     const reviewObj = useSelector(state => state.review.user)
-    const list = Object.values(reviewObj)
-    const [showMenu, setShowMenu] = useState(false)
-    const ulRef = useRef()
     console.log('reviewobj', reviewObj)
 
-    const reviewList = list.filter(review => review.userId === user.id)
+    const list = Object.values(reviewObj)
+    console.log('list of reviews', list)
+    const [showMenu, setShowMenu] = useState(false)
+    const ulRef = useRef()
+
+    const reviewList = list.filter((review) => review.userId === user.id)
 
     useEffect(() => {
         dispatch(getAllUserReviewsThunk())
@@ -41,7 +41,7 @@ function ManageReviews() {
     if(!reviewList){
         return null
     }
-console.log('reviewssssss', reviewList)
+
     return (
         <>
         <div className='manage-reviews'>
@@ -56,7 +56,7 @@ console.log('reviewssssss', reviewList)
                                 buttonText="Update"
                                 onItemClick={closeMenu}
                                 modalComponent={<UpdateReview
-                                    updateReview={review}
+                                    review={review}
                                     polish={review.Polish}
                                 />}
                             />
