@@ -1,39 +1,40 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { updateCartThunk } from '../../store/cart'
+import { updateCartThunk, getUserCartThunk, addPolishToCartThunk } from '../../store/cart'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import './UpdateCart.css'
 
 const UpdateCart = ({ polish, cart }) => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const [quantity, setQuantity] = useState(cart)
+    const [quantity, setQuantity] = useState(1)
     const [errors, setErrors] = useState({})
     const user = useSelector(state => state.session.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const editCart = () => {
-            
+        const editPolish = {
+            ...cart,
+            polishId: polish.id,
+            quantity: quantity,
         }
-        await dispatch(updateCartThunk(cart))
-            .then(history.push('/carts'))
 
+        const updateCart = await dispatch(updateCartThunk(polish, editPolish))
+            return (dispatch(getUserCartThunk()))
     }
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div>Quantity</div>
                 <select name="quantity" id="quant" value={quantity} onChange={(e) => setQuantity(e.target.value)}>
-                    <option value='1'>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value={Number(1)}>1</option>
+                    <option value={Number(2)}>2</option>
+                    <option value={Number(3)}>3</option>
+                    <option value={Number(4)}>4</option>
+                    <option value={Number(5)}>5</option>
                 </select>
-                <div className='update-button'>
+                <div className='update-cart'>
                     <button>Update cart</button>
                 </div>
             </form>

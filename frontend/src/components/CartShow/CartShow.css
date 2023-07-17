@@ -17,10 +17,9 @@
     border-radius: 11px;
     font-family: 'Roboto', sans-serif;
     width: 35rem;
-    height: 20rem;
+    height: 21rem;
     display: flex;
     flex-direction: row;
-    gap: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 

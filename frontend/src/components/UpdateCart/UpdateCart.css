@@ -1,4 +1,17 @@
-#quant{
+#quant {
     height: 2rem;
     width: 3rem;
+    margin-top: 1rem;
+}
+
+.update-cart{
+    margin-top: 1rem;
+}
+
+.update-cart button {
+    border: 2px solid black;
+    height: 2.5rem;
+    width: 5.5rem;
+    border-radius: 20px;
+    background-color: transparent;
 }

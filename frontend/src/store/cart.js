@@ -1,8 +1,10 @@
+import DeleteCart from "../components/DeleteCart";
 import { csrfFetch } from "./csrf";
 export const GET_USER_CART = 'carts/GET_USER_CART'
 export const DELETE_CART = 'carts/DELETE_CART'
 export const ADD_POLISH_CART = 'carts/ADD_POLISH_CART'
 export const UPDATE_CART = 'carts/UPDATE_CART'
+export const DELETE_POLISH = 'carts/DELETE_POLISH'
 
 export const getUserCart = (cart) => ({
     type: GET_USER_CART,
@@ -16,6 +18,11 @@ export const addPolishToCart = (cart) => ({
 
 export const updateCart = (cart) => ({
     type: UPDATE_CART,
+    cart
+})
+
+export const deletePolish = (cart) => ({
+    type: DELETE_POLISH,
     cart
 })
 
@@ -50,8 +57,8 @@ export const addPolishToCartThunk = (polish, cart) => async (dispatch) => {
 
 }
 
-export const updateCartThunk = (cart) => async (dispatch) => {
-    const res = await csrfFetch(`/api/carts/${cart.id}`, {
+export const updateCartThunk = (polish, cart) => async (dispatch) => {
+    const res = await csrfFetch(`/api/carts/${polish.id}/cart`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart),
@@ -60,6 +67,22 @@ export const updateCartThunk = (cart) => async (dispatch) => {
         const updatedCart = await res.json();
         dispatch(updateCart(updatedCart))
         return updatedCart
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const deletePolishThunk = (polish, cart) => async (dispatch) => {
+    console.log('in the thunk')
+    console.log('polish, in the thunk', polish)
+    console.log('cart in the thunk', cart)
+    const res = await csrfFetch(`/api/carts/${polish.id}/delete`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deletePolish(polish))
+        return cart
     } else {
         const errors = await res.json()
         return errors
@@ -93,9 +116,17 @@ const cartReducer = (state = initialState, action) => {
         case UPDATE_CART:
             newState = { ...state, user: { ...state.user } }
             return { ...state, user: { ...action.cart } }
-        case DELETE_CART:
+        case DELETE_POLISH:
             newState = { ...state, user: { ...state.user } }
-            delete newState.user[action.cart.id]
+            console.log('action', action)
+            delete newState.user[action.cart.cart.Polishes.id]
+            return newState
+        case DELETE_CART:
+            console.log(action.cart.cart.Polishes)
+            newState = { ...state, user: { ...state.user } }
+            action.cart.cart.Polishes.forEach(polish => {
+                delete newState.user[polish.id]
+            })
             return newState
         default:
             return state

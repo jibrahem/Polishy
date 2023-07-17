@@ -11,7 +11,7 @@ const CreateReview = ({ polish }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
-    const [stars, setStars] = useState(1)
+    const [stars, setStars] = useState(0)
     const [starRating, setStarRating] = useState()
     const [image, setImage] = useState('')
     const [errors, setErrors] = useState({})

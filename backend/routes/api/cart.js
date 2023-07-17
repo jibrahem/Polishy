@@ -23,6 +23,9 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ]
     })
+    if (!cart) {
+        return user.createCart()
+    }
 
     let sum = 0;
     let total = 0;
@@ -33,9 +36,7 @@ router.get('/current', requireAuth, async (req, res) => {
     cart.dataValues.totalPrice = sum;
     cart.dataValues.total = total
 
-    if (!cart) {
-        return user.createCart()
-    }
+
     return res.json({ cart })
 })
 
@@ -43,14 +44,16 @@ router.get('/current', requireAuth, async (req, res) => {
 // ADD items into a users cart
 router.post('/:polishId/cart', requireAuth, async (req, res) => {
     const { user } = req
-    const {quantity} = req.body
+    const { quantity } = req.body
     const polish = await Polish.findByPk(req.params.polishId)
     const cart = await Cart.findOne({
         where: {
             userId: user.id
         }
     })
-
+    if (!cart) {
+        return user.createCart()
+    }
     const newCart = await PolishCart.create({
         quantity: quantity,
         polishId: polish.id,
@@ -62,26 +65,72 @@ router.post('/:polishId/cart', requireAuth, async (req, res) => {
 })
 
 // UPDATE items from a users cart
-router.put('/:cartId', requireAuth, async (req, res) => {
+router.put('/:polishId/cart', requireAuth, async (req, res) => {
     const { user } = req;
     const { quantity } = req.body
-    const editCart = await Cart.findByPk(req.params.cartId)
-
-    if (!editCart) {
+    const polish = await Polish.findByPk(req.params.polishId)
+    const cart = await Cart.findOne({
+        where: {
+            userId: user.id
+        }
+    })
+    if (!cart) {
         return res.status(404).json({
             message: "Cart couldn't be found"
         })
     }
-    if (editCart.userId !== user.id) {
+    if (cart.userId !== user.id) {
         res.status(403).json({
             message: 'Forbidden'
         })
     }
-    console.log('edit cart in the backend', editCart)
-    editCart.PolishCart.quantity = quantity
-    await editCart.save()
-    return res.json(editCart)
+    const polishCart = await PolishCart.findOne({
+        where: {
+            polishId: polish.id
+        }
+    })
 
+    const updateCart = await polishCart.update({
+        quantity: quantity,
+        polishId: polish.id,
+        cartId: cart.id
+    })
+
+    await updateCart.save()
+    return res.json(updateCart)
+
+})
+
+//DELETE a polish from shopping cart
+
+router.delete('/:polishId/delete', requireAuth, async (req, res) => {
+    const { user } = req;
+    const cart = await Cart.findOne({
+        where: {
+            userId: user.id
+        }
+    })
+    const polish = await Polish.findByPk(req.params.polishId)
+    // const polishCart = await PolishCart.findOne({
+    //     where: {
+    //         polishId: polish.id
+    //     }
+    // })
+    if (!cart) {
+        res.status(404).json({
+            message: "Cart couldn't be found"
+        })
+    }
+    if (cart.userId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    }
+
+    await polish.destroy()
+    return res.json({
+        message: "Successfully deleted"
+    })
 })
 
 // DELETE a users cart

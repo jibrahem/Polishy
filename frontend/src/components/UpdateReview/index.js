@@ -8,8 +8,8 @@ import { useHistory } from 'react-router-dom'
 const UpdateReview = ({ polish, review }) => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const [text, setText] = useState('')
-    const [stars, setStars] = useState(1)
+    const [text, setText] = useState(review.review)
+    const [stars, setStars] = useState(review.stars)
     const [starRating, setStarRating] = useState()
     const [image, setImage] = useState('')
     const [errors, setErrors] = useState({})
@@ -61,8 +61,8 @@ const UpdateReview = ({ polish, review }) => {
     return (
         <>
             <div className='post-review'>
-                <h1>Update the nail polish review</h1>
                 <form onSubmit={handleSubmit}>
+                <h1>Update the nail polish review</h1>
                     <div className="errors">{errors.stars}</div>
                     <div className="rating-input">
                         <i class="fa-regular fa-star"

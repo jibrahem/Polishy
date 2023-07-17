@@ -28,7 +28,7 @@ function Navigation({ isLoaded }) {
 
     const closeMenu = () => setShowMenu(false);
 
-    const onClick = () =>{
+    const onClick = () => {
         history.push('/carts')
     }
 
@@ -37,37 +37,39 @@ function Navigation({ isLoaded }) {
         <div className='nav-wrap'>
             <nav>
                 <div className='nav'>
-                <ul>
-                    <li>
-                        <div className='polishy'>
-                            <NavLink exact to="/">Polishy</NavLink>
+                    <ul>
+                        <li>
+                            <div className='polishy'>
+                                <NavLink exact to="/">Polishy</NavLink>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='search'>
+                                <input type="search"
+                                    placeholder='   Search for anything'
+                                />
+                                <button type='submit'>
+                                    <i class="fa-solid fa-magnifying-glass">
+                                    </i></button>
+                            </div>
+                        </li>
+                        <div className='cart_profile'>
+                            {isLoaded && (
+                                <li>
+                                    <ProfileButton user={sessionUser} />
+                                </li>
+                            )}
+                            {sessionUser &&
+                                <div className='shopping-cart'>
+                                    <li>
+                                        <button onClick={onClick}>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </button>
+                                    </li>
+                                </div>
+                            }
                         </div>
-                    </li>
-                    <li>
-                        <div className='search'>
-                            <input type="search"
-                                placeholder='   Search for anything'
-                            />
-                            <button type='submit'>
-                                <i class="fa-solid fa-magnifying-glass">
-                            </i></button>
-                        </div>
-                    </li>
-                    <div className='cart_profile'>
-                        {isLoaded && (
-                            <li>
-                                <ProfileButton user={sessionUser} />
-                            </li>
-                        )}
-                        <div className='shopping-cart'>
-                            <li>
-                                <button onClick={onClick}>
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </li>
-                        </div>
-                    </div>
-                </ul>
+                    </ul>
                 </div>
             </nav>
         </div>

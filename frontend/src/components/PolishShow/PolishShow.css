@@ -12,6 +12,12 @@ section {
     margin: 1rem;
 }
 
+.review-img img{
+height: 100px;
+width:100px;
+border-radius: 8px;
+}
+
 .polish-box {
     display: grid;
     grid-template-columns: 1fr 1fr;

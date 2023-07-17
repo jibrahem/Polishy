@@ -19,7 +19,7 @@ const PolishShow = () => {
     polishId = Number(polishId)
 
     const polish = useSelector(state => state.polish.singlePolish)
-    const userId = useSelector(state => state.session.user?.id)
+    const user = useSelector(state => state.session.user)
     const reviewObj = useSelector(state => state.review.polish)
 
     const reviewList = Object.values(reviewObj)
@@ -63,12 +63,12 @@ const PolishShow = () => {
         return null
     }
 
-    const sortedReviews = newReviewList.sort((a, b) =>{
+    const sortedReviews = newReviewList.sort((a, b) => {
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     })
 
 
-    const [userReview] = newReviewList.filter(review => review.userId === userId)
+    const [userReview] = newReviewList.filter(review => review.userId === user?.id)
 
     return (
         <section>
@@ -80,42 +80,46 @@ const PolishShow = () => {
                     <div className="price-cart">${polish.price}</div>
                     <div>Free Shipping</div>
                     <div className="des">{polish.description}</div>
-                    <AddPolishCart
-                        polish={polish} />
+                    {user &&
+                        <AddPolishCart
+                            polish={polish} />
+                    }
+                    {!user &&
+                    <div>Sign in or register to make a purchase</div>}
                 </div>
             </div>
             <div className="review-nav">
                 <div className="review-rating">
-                {polish.numReviews === 0 &&
-                    <div className='stars'>{polish.numReviews} reviews </div>
-                }
-                {polish.numReviews === 1 &&
-                    <div className='stars'>{polish.numReviews} review </div>
-                }
-                {polish.numReviews > 1 &&
-                    <div className='stars'>{polish.numReviews} reviews </div>
-                }
-                {polish.avgRating === null &&
-                    <div><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
-                }
-                {(polish.avgRating === 1 || (polish.avgRating > .5 && polish.avgRating < 1.5)) &&
-                    <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
-                }
-                {(polish.avgRating === 2 || (polish.avgRating > 1.5 && polish.avgRating < 2.5)) &&
-                    <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
-                }
-                {(polish.avgRating === 3 || (polish.avgRating >= 2.5 && polish.avgRating < 3.5)) &&
-                    <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
-                }
-                {(polish.avgRating === 4 || (polish.avgRating >= 3.5 && polish.avgRating < 4.5)) &&
-                    <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
-                }
-                {(polish.avgRating === 5 || (polish.avgRating >= 4.5)) &&
-                    <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
-                }
+                    {polish.numReviews === 0 &&
+                        <div className='stars'>{polish.numReviews} reviews </div>
+                    }
+                    {polish.numReviews === 1 &&
+                        <div className='stars'>{polish.numReviews} review </div>
+                    }
+                    {polish.numReviews > 1 &&
+                        <div className='stars'>{polish.numReviews} reviews </div>
+                    }
+                    {polish.avgRating === null &&
+                        <div><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    }
+                    {(polish.avgRating === 1 || (polish.avgRating > .5 && polish.avgRating < 1.5)) &&
+                        <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    }
+                    {(polish.avgRating === 2 || (polish.avgRating > 1.5 && polish.avgRating < 2.5)) &&
+                        <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    }
+                    {(polish.avgRating === 3 || (polish.avgRating >= 2.5 && polish.avgRating < 3.5)) &&
+                        <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    }
+                    {(polish.avgRating === 4 || (polish.avgRating >= 3.5 && polish.avgRating < 4.5)) &&
+                        <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    }
+                    {(polish.avgRating === 5 || (polish.avgRating >= 4.5)) &&
+                        <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
+                    }
                 </div>
                 <div className="add-review">
-                    {!userReview && userId &&
+                    {!userReview && user &&
                         <OpenModalMenuItem
                             buttonText="Add Review"
                             onItemClick={closeMenu}
@@ -126,7 +130,7 @@ const PolishShow = () => {
                 </div>
             </div>
             {newReviewList.length === 0 &&
-            <div className="no-review">Be the first to post a review!</div>
+                <div className="no-review">Be the first to post a review!</div>
             }
             <div className="reviews">
                 <ul>
@@ -145,10 +149,11 @@ const PolishShow = () => {
                                 <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
                             }
                             {review.stars === 5 &&
-                            <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
                             }
                             <div className="review-text">{review.review}</div>
                             <div className="purchase">Purchased item: {polish.description}</div>
+                            <div className="review-img"><img src={review.image} alt='review'></img></div>
                             <div className="name-date">
                                 <div className="review-name">{review.User?.firstName}</div>
                                 {review.createdAt.split('-')[1] === '01' &&

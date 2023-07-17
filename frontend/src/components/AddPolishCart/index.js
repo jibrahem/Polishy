@@ -15,9 +15,12 @@ const AddPolishCart = ({ polish }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        cart.Polishes.push(polish)
-        await dispatch(addPolishToCartThunk(polish, cart))
-            .then(getUserCartThunk())
+        const polishCart = {
+            quantity: quantity,
+            polishId: polish.id,
+        }
+        await dispatch(addPolishToCartThunk(polish, polishCart))
+            .then(dispatch(getUserCartThunk()))
             .then(history.push('/carts'))
 
     }
