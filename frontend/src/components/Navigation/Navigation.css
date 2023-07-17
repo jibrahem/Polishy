@@ -32,18 +32,17 @@ ul li {
     margin: 1rem;
 }
 
-nav ul {
+/* .nav-wrap {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
-}
+} */
 
 .nav-wrap {
     border-bottom: 2px solid rgb(228, 224, 224);
     margin-bottom: 1rem;
-
 }
 
 nav {
@@ -56,6 +55,14 @@ nav {
     flex-direction: row;
     gap: .5rem;
     align-items: center;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%
 }
 
 .shopping-cart button {
