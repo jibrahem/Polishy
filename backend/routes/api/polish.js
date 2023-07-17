@@ -8,11 +8,22 @@ const router = express.Router();
 
 //GET ALL POLISHES
 router.get('/', async (req, res) => {
-    const allPolishes = await Polish.findAll({
+    const polishes = await Polish.findAll({
         include: [
             { model: Review }
         ]
     })
+    let allPolishes = [];
+    polishes.forEach(polish => {
+        allPolishes.push(polish.toJSON());
+    });
+    allPolishes.forEach(polish => {
+        let sum = 0;
+        polish.Reviews.forEach(review => {
+            sum += review.stars;
+        });
+        polish.avgRating = sum / polish.Reviews.length;
+    });
     return res.json(allPolishes)
 })
 
@@ -40,7 +51,7 @@ router.get('/:polishId', async (req, res) => {
     polish.Reviews.forEach(review => {
         sum += review.stars
     })
-    polish.dataValues.avgStarRating = sum / polish.Reviews.length;
+    polish.dataValues.avgRating = sum / polish.Reviews.length;
 
     return res.json(polish)
 })

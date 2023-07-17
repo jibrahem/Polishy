@@ -1,0 +1,9 @@
+.delete{
+    font-family: 'Roboto', sans-serif;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 10rem;
+    align-items: center;
+}

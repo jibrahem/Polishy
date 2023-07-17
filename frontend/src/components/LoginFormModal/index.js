@@ -52,47 +52,57 @@ function LoginFormModal() {
             });
     };
 
-    const demo = () =>{
+    const demo = () => {
         return dispatch(sessionActions.login({
             credential: 'raven@aa.io',
             password: 'password'
         }))
-        .then(closeModal)
+            .then(closeModal)
     }
 
     return (
         <>
-            <h1>Sign In</h1>
-            <OpenModalMenuItem
-                buttonText="Register"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-            />
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Email
-                    <input
-                        type="email"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
+            <div className="signin-form">
+                <form onSubmit={handleSubmit}>
+                <div className="reg">
+                    <h4>Sign in</h4>
+                    <OpenModalMenuItem
+                        buttonText="Register"
+                        onItemClick={closeMenu}
+                        modalComponent={<SignupFormModal />}
                     />
-                </label>
-                <label>
-                    Password
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
-                {errors.credential && (
-                    <p>{errors.credential}</p>
-                )}
-                <button type="submit">Log In</button>
-            </form>
+                </div>
+                    <label>
+                        Email address
+                        <input
+                            type="email"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <div className="errors">
+                        {errors.credential && (
+                            <p>{errors.credential}</p>
+                        )}
+                    </div>
+                    <label>
+                        Password
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <div className="submit-button">
+                        <button type="submit">Sign in</button>
+                    </div>
+                </form>
+            </div>
+            <div className="demo">
             <button onClick={demo}>Demo User</button>
+            </div>
         </>
     );
 }

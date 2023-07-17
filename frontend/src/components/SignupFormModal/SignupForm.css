@@ -1,0 +1,19 @@
+.register{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap:1rem;
+    margin-left: 3rem
+}
+
+.register h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.register h5{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+}

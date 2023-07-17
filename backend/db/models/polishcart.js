@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 1,
+      validate:{
+        max: 5
+      }
     },
     polishId: {
       type: DataTypes.INTEGER,

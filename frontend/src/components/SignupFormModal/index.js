@@ -38,8 +38,11 @@ function SignupFormModal() {
     };
 
     return (
-        <>
-            <h1>Sign Up</h1>
+        <> <div className="signin-form">
+                <div className="register">
+                <h4>Create your account</h4>
+                <h5>Registration is easy.</h5>
+                </div>
             <form onSubmit={handleSubmit}>
                 <label>
                     Email
@@ -83,8 +86,11 @@ function SignupFormModal() {
                 {errors.confirmPassword && (
                     <p>{errors.confirmPassword}</p>
                 )}
-                <button type="submit">Sign Up</button>
+                <div className="submit-button">
+                <button type="submit">Register</button>
+                </div>
             </form>
+        </div>
         </>
     );
 }

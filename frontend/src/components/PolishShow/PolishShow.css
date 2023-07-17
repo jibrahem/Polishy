@@ -1,13 +1,116 @@
-.polish-box img{
-    height: 500px;
-    width:500px;
-    border-radius: 7px;
+.polish-box img {
+    height: 600px;
+    width: 600px;
+    border-radius: 10px;
 }
 
-main{
+main {
     margin: 1rem;
 }
 
-section{
-    margin:1rem;
+section {
+    margin: 1rem;
+}
+
+.polish-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem;
+    margin-left: 5rem;
+    gap: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.add-review button {
+    border: 2px solid black;
+    height: 3rem;
+    width: 200px;
+    border-radius: 25px;
+    background-color: transparent;
+    font-size: 15px;
+}
+
+.price-des {
+    margin: 1rem;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+
+.price-cart {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+}
+
+.des {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.review-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 640px;
+    font-size: 25px;
+    margin: 1rem;
+    margin-left: 3rem;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 2px solid rgb(219, 215, 215);
+    padding-bottom: 1rem;
+    align-items: center;
+}
+
+li {
+    list-style: none;
+}
+
+.reviews ul {
+    width: 600px;
+    margin-left: 3rem;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.name-date {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 15px;
+}
+
+.review{
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(219, 215, 215);
+}
+
+.review-text{
+    margin-top:.5rem;
+    margin-bottom: .5rem;
+}
+
+.purchase{
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+
+.no-review{
+    font-family: 'Roboto', sans-serif;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+}
+
+.review-rating{
+    display: flex;
+    flex-direction: row;
+    gap:1rem
 }

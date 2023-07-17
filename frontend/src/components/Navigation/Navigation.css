@@ -2,6 +2,22 @@
     display: none;
 }
 
+.profile-dropdown {
+    margin-top: .5rem;
+    border: 1px solid black;
+    position: absolute;
+    background-color: whitesmoke;
+    top: 70px;
+    right: 40px;
+
+}
+
+.profile-dropdown li {
+    display: flex;
+    flex-direction: column;
+    margin: .6rem;
+}
+
 ul li {
     list-style: none;
 }
@@ -30,7 +46,7 @@ nav ul {
 
 }
 
-nav{
+nav {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
@@ -42,7 +58,7 @@ nav{
     align-items: center;
 }
 
-.cart button {
+.shopping-cart button {
     background-color: transparent;
     border: none;
     font-size: 14px;
@@ -52,7 +68,7 @@ nav{
     cursor: pointer;
 }
 
-.cart button:hover {
+.shopping-cart button:hover {
     background-color: rgb(233, 241, 241);
 }
 
@@ -70,13 +86,13 @@ nav{
     background-color: rgb(233, 241, 241);
 }
 
-.search{
+.search {
     display: flex;
     flex-direction: row;
     width: 42rem;
 }
 
-.search input{
+.search input {
     width: 100%;
     border-radius: 50px;
     height: 2.5rem;
@@ -84,7 +100,31 @@ nav{
     background-color: rgb(242, 241, 241);
 }
 
-.search button{
-    border:none;
+.search button {
+    border: none;
     background-color: transparent;
+}
+
+.prof button:hover {
+    background-color: rgb(233, 241, 241);
+}
+
+.prof button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 30px;
+    background-color: transparent;
+    border: none
+}
+
+.signout button {
+    height: 3rem;
+    width: 4rem;
+    border-radius: 30px;
+    background-color: transparent;
+    border: none
+}
+
+.signout button:hover {
+    background-color: rgb(233, 241, 241);
 }

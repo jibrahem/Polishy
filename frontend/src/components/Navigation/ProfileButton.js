@@ -57,9 +57,11 @@ function ProfileButton({ user }) {
     } else {
         return (
             <>
-                <button onClick={openMenu}>
-                    <i class="fa-solid fa-user"></i>
-                </button>
+                <div className="prof">
+                    <button onClick={openMenu}>
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+                </div>
                 <ul className={ulClassName} ref={ulRef}>
                     <>
                         <li>{user.firstName}</li>
@@ -70,7 +72,9 @@ function ProfileButton({ user }) {
                             </NavLink>
                         </li>
                         <li>
-                            <button onClick={logout}>Log Out</button>
+                            <div className="signout">
+                                <button onClick={logout}>Sign Out</button>
+                            </div>
                         </li>
                     </>
                 </ul>

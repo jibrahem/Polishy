@@ -2,40 +2,57 @@
     text-decoration: none;
 }
 
-.front-image{
+.front-image {
     margin: 1rem;
 }
 
-.front-image ul img{
+.front-image ul img {
     border-radius: 100px;
     height: 100px;
     width: 100px;
 }
 
-.front-image li{
+.front-image li img:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .3);
+    transition: all .3s ease;
+}
+
+.front-image li {
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
     justify-content: center;
 }
 
-.top-text{
+.top-text {
     display: flex;
     justify-content: center;
     font-size: 30px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .polish img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     border-radius: 10px;
 }
+
 .polish {
     margin: 1rem;
-    width: 200px;
+    width: 250px;
     transition: box-shadow .3s;
     border-radius: 6px;
+    font-family: 'Roboto', sans-serif;
 }
 
-.polish:hover {
+.img {
+    transition: box-shadow .3s;
+    border-radius: 10px;
+}
+
+.img:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, .3);
+}
+
+a {
+    color: black;
 }

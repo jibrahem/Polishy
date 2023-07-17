@@ -1,9 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUserReviewsThunk } from '../../store/review'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import DeleteReview from '../DeleteReview'
 import UpdateReview from '../UpdateReview'
+import './ManageReviews.css'
 
 function ManageReviews() {
     const dispatch = useDispatch()
@@ -38,41 +39,60 @@ function ManageReviews() {
 
     const closeMenu = () => setShowMenu(false);
 
-    if(!reviewList){
+    if (!reviewList) {
         return null
     }
 
     return (
         <>
-        <div className='manage-reviews'>
-            <h1>Manage your reviews</h1>
-            <ul>
-                {reviewList.length > 0 && reviewList.map(review => (
-                    <div key={review.id} className='review'>
+            <div className='manage-reviews'>
+                <h1>Manage your reviews</h1>
+                <ul>
+                    {reviewList.length > 0 && reviewList.map(review => (
+                        <div key={review.id} className='review'>
                             <div>{review.Polish.description}</div>
                             <div>{review.review}</div>
-                            <div>{review.stars}</div>
-                            <OpenModalMenuItem
-                                buttonText="Update"
-                                onItemClick={closeMenu}
-                                modalComponent={<UpdateReview
-                                    review={review}
-                                    polish={review.Polish}
-                                />}
-                            />
-                        <OpenModalMenuItem
-                            buttonText="Delete"
-                            onItemClick={closeMenu}
-                            modalComponent={<DeleteReview
-                                review={review}
-                                polish={review.Polish}
-                            />}
-                        />
-                            <div></div>
-                    </div>
-                ))}
-            </ul>
-        </div>
+                            {review.stars === 1 &&
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                            }
+                            {review.stars === 2 &&
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                            }
+                            {review.stars === 3 &&
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                            }
+                            {review.stars === 4 &&
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                            }
+                            {review.stars === 5 &&
+                                <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
+                            }
+                            <div className='update-delete'>
+                                <div className='update-button'>
+                                    <OpenModalMenuItem
+                                        buttonText="Update"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<UpdateReview
+                                            review={review}
+                                            polish={review.Polish}
+                                        />}
+                                    />
+                                </div>
+                                <div className='delete-button'>
+                                    <OpenModalMenuItem
+                                        buttonText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteReview
+                                            review={review}
+                                            polish={review.Polish}
+                                        />}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </ul>
+            </div>
         </>
     )
 }

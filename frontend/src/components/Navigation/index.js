@@ -36,6 +36,7 @@ function Navigation({ isLoaded }) {
     return (
         <div className='nav-wrap'>
             <nav>
+                <div className='nav'>
                 <ul>
                     <li>
                         <div className='polishy'>
@@ -58,7 +59,7 @@ function Navigation({ isLoaded }) {
                                 <ProfileButton user={sessionUser} />
                             </li>
                         )}
-                        <div className='cart'>
+                        <div className='shopping-cart'>
                             <li>
                                 <button onClick={onClick}>
                                     <i class="fa-solid fa-cart-shopping"></i>
@@ -67,6 +68,7 @@ function Navigation({ isLoaded }) {
                         </div>
                     </div>
                 </ul>
+                </div>
             </nav>
         </div>
     );
