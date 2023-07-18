@@ -52,7 +52,9 @@ function ManageReviews() {
                         <div key={review.id} className='review'>
                             <div>{review.Polish.description}</div>
                             <div>{review.review}</div>
-                            <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            {review.image &&
+                                <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            }
                             {review.stars === 1 &&
                                 <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
                             }

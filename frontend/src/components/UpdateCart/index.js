@@ -17,7 +17,7 @@ const UpdateCart = ({ polish, cart }) => {
         const editPolish = {
             ...cart,
             polishId: polish.id,
-            quantity: quantity,
+            quantity: Number(quantity),
         }
 
         const updateCart = await dispatch(updateCartThunk(polish, editPolish))

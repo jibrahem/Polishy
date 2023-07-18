@@ -85,7 +85,7 @@ const PolishShow = () => {
                             polish={polish} />
                     }
                     {!user &&
-                    <div>Sign in or register to make a purchase</div>}
+                        <div>Sign in or register to make a purchase</div>}
                 </div>
             </div>
             <div className="review-nav">
@@ -153,7 +153,9 @@ const PolishShow = () => {
                             }
                             <div className="review-text">{review.review}</div>
                             <div className="purchase">Purchased item: {polish.description}</div>
-                            <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            {review.image &&
+                                <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            }
                             <div className="name-date">
                                 <div className="review-name">{review.User?.firstName}</div>
                                 {review.createdAt.split('-')[1] === '01' &&
