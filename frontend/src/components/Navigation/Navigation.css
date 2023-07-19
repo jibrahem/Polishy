@@ -27,7 +27,7 @@
 }
 
 .profile-dropdown a:hover {
-background-color: rgb(233, 241, 241);
+    background-color: rgb(233, 241, 241);
 }
 
 ul li {
@@ -43,7 +43,8 @@ ul li {
     font-size: 40px;
     margin: 1rem;
 }
-.polishy a{
+
+.polishy a {
     text-decoration: none;
 }
 
@@ -103,7 +104,7 @@ nav {
 .search {
     display: flex;
     flex-direction: row;
-    width: 44rem;
+    width: 71rem;
     padding: 1rem;
     align-items: center;
 }
@@ -111,10 +112,11 @@ nav {
 .search input {
     width: 100%;
     border-radius: 50px;
-    height: 2.5rem;
+    height: 3rem;
     border: 2px solid black;
     background-color: rgb(242, 241, 241);
     cursor: not-allowed;
+    font-family: 'Roboto', sans-serif;
 }
 
 .search button {
@@ -148,8 +150,27 @@ nav {
     background-color: rgb(233, 241, 241);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1390px) {
     .search {
-        width: 35rem;
-    }
+            width: 55rem;
+        }
+}
+
+@media (max-width: 1100px) {
+    .search {
+            width: 40rem;
+        }
+}
+
+@media (max-width: 900px) {
+    .search {
+            width: 25rem;
+        }
+}
+
+
+@media (max-width: 700px) {
+    .search {
+            width: 15rem;
+        }
 }

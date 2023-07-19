@@ -32,6 +32,10 @@ const CreateReview = ({ polish }) => {
         if (!review) {
             errors.review = 'Review text is required'
         }
+        if(review && review.length > 200){
+            errors.review = 'Reviews can only have a max of 200 characters'
+        }
+
         if (!stars) {
             errors.stars = "Star rating is required"
         }
@@ -104,12 +108,13 @@ const CreateReview = ({ polish }) => {
                             onMouseLeave={() => setStarRating(0)}
                             className={setStar(5)}></i> Stars
                     </div>
+                    <div className='errors'>{errors.review}</div>
                     <textarea
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                         placeholder='Leave your review'
                     />
-                    <div className='errors'>{errors.review}</div>
+
                     <input type='text'
                         placeholder='Want to add an image'
                         value={image}

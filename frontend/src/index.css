@@ -24,7 +24,7 @@ main ul {
 
 }
 
-@media (max-width: 1370px) {
+@media (max-width: 1390px) {
     main ul {
         grid: auto-flow/ 1fr 1fr 1fr 1fr;
     }

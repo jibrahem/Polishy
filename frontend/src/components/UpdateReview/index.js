@@ -31,6 +31,9 @@ const UpdateReview = ({ polish, review }) => {
         if (!text) {
             errors.text = 'Review text is required'
         }
+        if (text && text.length > 200) {
+            errors.review = 'Reviews can only have a max of 200 characters'
+        }
         if (!stars) {
             errors.stars = "Star rating is required"
         }
@@ -99,12 +102,13 @@ const UpdateReview = ({ polish, review }) => {
                             onMouseLeave={() => setStarRating(0)}
                             className={setStar(5)}></i> Stars
                     </div>
+                    <div className='errors'>{errors.text}</div>
                     <textarea
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         placeholder='Leave your review'
                     />
-                    <div className='errors'>{errors.text}</div>
+
                     <button type='submit'>Update Review</button>
                 </form>
             </div>

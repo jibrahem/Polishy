@@ -46,7 +46,7 @@ function Navigation({ isLoaded }) {
                             </li>
                             <li>
                                 <div className='search'>
-                                    <input type="search"
+                                    <input type="search" class='search'
                                         placeholder='   Search for anything'
                                     />
                                     <button>
