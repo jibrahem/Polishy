@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { getUserCartThunk, deleteCartThunk } from '../../store/cart'
-import { useLayoutEffect } from 'react'
+import { getUserCartThunk, deletePolishThunk } from '../../store/cart'
 import './CartShow.css'
 import DeleteCart from '../DeleteCart'
 import UpdateCart from '../UpdateCart'
@@ -15,23 +14,46 @@ const CartShow = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const cart = useSelector(state => state.cart.user.cart)
+    const cart = useSelector(state => state.cart.user.Carts)
+
+    console.log(cart)
 
     useEffect(() => {
         dispatch(getUserCartThunk())
     }, [dispatch])
 
+    const orderPlaced = () => {
+        window.alert('Your order has been placed')
+    }
+
+    const totalItem = (cart) => {
+        let sum = 0
+        cart.forEach(oneCart => {
+            sum += oneCart.quantity
+        })
+        return sum
+    }
+
+    const totalPrice = (cart) => {
+        let sum = 0;
+        cart.forEach(oneCart => {
+            sum += oneCart.Polish.price * oneCart.quantity
+        })
+        return sum
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await dispatch(deleteCartThunk(cart))
-            .then(history.push('/'))
+        cart.forEach(oneCart => {
+            dispatch(deletePolishThunk(oneCart))
+            dispatch(getUserCartThunk())
+            history.push('/')
+        })
+        return orderPlaced()
     }
-
     if (!cart) {
-        return (
-            <div>Add something to your cart!</div>
-        )
+        return null
     }
 
     if (!user) {
@@ -39,23 +61,28 @@ const CartShow = () => {
             <div>Login or register to make a purchase!</div>
         )
     }
+    if (!cart.length) {
+        return (
+            <>Add something to your cart!</>
+        )
+    }
     if (user) {
-
-        if (cart) {
+        if (cart.length) {
             return (
                 <div className='cart'>
                     <ul>
-                        {cart?.Polishes.map(polish => (
+                        {cart.map(polish => (
                             <div key={polish.id} className='polish-items'>
                                 <div className='cart-pic'>
+                                    {console.log('carr', polish)}
                                     <li>
-                                        <img src={polish.image} alt='polish'></img>
+                                        <img src={polish.Polish.image} alt='polish'></img>
                                     </li>
                                 </div>
 
                                 <div className='cart-quan'>
                                     <li>{polish.description}</li>
-                                    <li>Quantity: {polish.PolishCart.quantity}</li>
+                                    <li>Quantity: {polish.quantity}</li>
                                     < UpdateCart
                                         cart={cart}
                                         polish={polish} />
@@ -64,8 +91,8 @@ const CartShow = () => {
                                         polish={polish} />
                                 </div>
                                 <div className='cart-price'>
-                                    <li>Price: ${polish.price * polish.PolishCart.quantity}</li>
-                                    <li>(${polish.price} each)</li>
+                                    <li>Price: ${polish.Polish.price * polish.quantity}</li>
+                                    <li>(${polish.Polish.price} each)</li>
                                 </div>
                             </div>
 
@@ -73,19 +100,20 @@ const CartShow = () => {
                     </ul>
                     <div className='cart-purchase'>
                         <div className='total-cost'>
+
                             <div className='bold'>Item(s) total: </div>
-                            <div>${cart.totalPrice.toFixed(2)}</div>
+                            <div>${totalPrice(cart).toFixed(2)}</div>
                         </div>
                         <div className='shipping'>Free Shipping</div>
                         <div className='final-total'>
-                            <div className='bold'>Total ({cart.total} items)</div>
-                            <div>${cart.totalPrice.toFixed(2)}</div>
+                            <div className='bold'>Total ({totalItem(cart)} items)</div>
+                            <div>${totalPrice(cart).toFixed(2)}</div>
                         </div>
-                        <div className='checkout'>
-                            <button onClick={handleSubmit}>Checkout</button>
-                        </div>
-                        <DeleteCart
-                            cart={cart} />
+                        {cart.length &&
+                            <div className='checkout'>
+                                <button onClick={handleSubmit} onSubmit={orderPlaced}>Checkout</button>
+                            </div>
+                        }
                     </div>
                 </div>
             )

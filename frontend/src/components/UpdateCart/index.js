@@ -6,22 +6,29 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import './UpdateCart.css'
 
 const UpdateCart = ({ polish, cart }) => {
+    console.log('polish trying to add', polish)
+    console.log('cart in update', cart)
     const history = useHistory()
     const dispatch = useDispatch()
-    const [quantity, setQuantity] = useState(1)
+    const list = Object.values(cart)
+    const filterCart = list.find(({ id }) => id === polish.id)
+    const [quantity, setQuantity] = useState(filterCart.quantity)
     const [errors, setErrors] = useState({})
     const user = useSelector(state => state.session.user)
+    console.log('filtered cart trying to create', filterCart)
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const editPolish = {
-            ...cart,
-            polishId: polish.id,
+        const editCart = {
+            ...polish,
             quantity: Number(quantity),
         }
 
-        const updateCart = await dispatch(updateCartThunk(polish, editPolish))
-            return (dispatch(getUserCartThunk()))
+        const updateCart = await dispatch(updateCartThunk(editCart))
+        return dispatch(getUserCartThunk())
+
     }
 
     return (

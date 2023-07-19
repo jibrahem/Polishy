@@ -23,12 +23,12 @@ module.exports = {
       {
         polishId: 1,
         quantity: 2,
-        cartId: 1
+        userId: 3
       },
       {
         polishId: 2,
         quantity: 1,
-        cartId: 1
+        userId: 3
       },
     ])
   },

@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      PolishCart.belongsTo(models.User, { foreignKey: 'userId' })
+      PolishCart.belongsTo(models.Polish, { foreignKey: 'polishId' })
     }
   }
   PolishCart.init({
@@ -27,11 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: { model: 'Polishes' }
     },
-    cartId: {
+    userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: 'Carts' }
-    }
+      references: { model: 'Users' }
+    },
   }, {
     sequelize,
     modelName: 'PolishCart',

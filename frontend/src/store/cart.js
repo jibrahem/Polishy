@@ -1,4 +1,3 @@
-import DeleteCart from "../components/DeleteCart";
 import { csrfFetch } from "./csrf";
 export const GET_USER_CART = 'carts/GET_USER_CART'
 export const DELETE_CART = 'carts/DELETE_CART'
@@ -57,14 +56,17 @@ export const addPolishToCartThunk = (polish, cart) => async (dispatch) => {
 
 }
 
-export const updateCartThunk = (polish, cart) => async (dispatch) => {
-    const res = await csrfFetch(`/api/carts/${polish.id}/cart`, {
+export const updateCartThunk = (cart) => async (dispatch) => {
+    console.log('cart in the thunk', cart)
+    const res = await csrfFetch(`/api/carts/${cart.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart),
     })
     if (res.ok) {
+        console.log('ressss', res)
         const updatedCart = await res.json();
+        console.log('res in thunk', updatedCart)
         dispatch(updateCart(updatedCart))
         return updatedCart
     } else {
@@ -73,15 +75,12 @@ export const updateCartThunk = (polish, cart) => async (dispatch) => {
     }
 }
 
-export const deletePolishThunk = (polish, cart) => async (dispatch) => {
-    console.log('in the thunk')
-    console.log('polish, in the thunk', polish)
-    console.log('cart in the thunk', cart)
-    const res = await csrfFetch(`/api/carts/${polish.id}/delete`, {
+export const deletePolishThunk = (cart) => async (dispatch) => {
+    const res = await csrfFetch(`/api/carts/${cart.id}/delete`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        dispatch(deletePolish(polish))
+        dispatch(deletePolish(cart))
         return cart
     } else {
         const errors = await res.json()
@@ -111,15 +110,15 @@ const cartReducer = (state = initialState, action) => {
             return { ...state, user: { ...action.cart } }
         case ADD_POLISH_CART:
             newState = { ...state, user: { ...state.user } }
-            newState.user[action.cart.polish] = action.cart.polish
+            newState.user[action.cart.id] = action.cart
             return newState
         case UPDATE_CART:
             newState = { ...state, user: { ...state.user } }
+            console.log('action.user ', action)
             return { ...state, user: { ...action.cart } }
         case DELETE_POLISH:
             newState = { ...state, user: { ...state.user } }
-            console.log('action', action)
-            delete newState.user[action.cart.cart.Polishes.id]
+            delete newState.user[action.cart]
             return newState
         case DELETE_CART:
             console.log(action.cart.cart.Polishes)

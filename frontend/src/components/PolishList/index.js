@@ -37,7 +37,6 @@ function PolishList() {
                 <ul>
                     {polishList.length > 0 && polishList.map(polish => (
                         <div key={polish.id} className='polish'>
-                            {console.log(polish)}
                             <Link to={`/polishes/${polish.id}`}>
                                 <div className='img'>
                                     <img src={polish.image} alt='polish'></img>

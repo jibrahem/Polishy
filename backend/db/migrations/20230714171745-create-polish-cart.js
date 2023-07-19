@@ -26,10 +26,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Polishes' }
       },
-      cartId: {
-        allowNull: false,
+      userId: {
         type: Sequelize.INTEGER,
-        references: { model: 'Carts' }
+        references: { model: 'Users' }
       },
       createdAt: {
         allowNull: false,

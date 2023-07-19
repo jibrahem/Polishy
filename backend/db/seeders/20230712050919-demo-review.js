@@ -24,29 +24,26 @@ module.exports = {
         polishId: 1,
         userId: 3,
         review: 'Such a beautiful color',
+        image: 'https://i.etsystatic.com/20946194/r/il/cdf032/2442688185/il_570xN.2442688185_7uib.jpg',
         stars: 5,
-        image: 'polish.jpg'
       },
       {
         polishId: 2,
-        userId: 1,
+        userId: 2,
         review: 'It was pretty but not exactly like the picture',
         stars: 3,
-        image: 'polish.jpg'
       },
       {
         polishId: 3,
         userId: 2,
         review: 'Really nice',
         stars: 4,
-        image: 'polish.jpg'
       },
       {
         polishId: 4,
         userId: 3,
         review: 'It came broken',
         stars: 1,
-        image: 'polish.jpg'
       },
     ])
   },
