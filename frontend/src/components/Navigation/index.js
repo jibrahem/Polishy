@@ -49,8 +49,8 @@ function Navigation({ isLoaded }) {
                                     <input type="search"
                                         placeholder='   Search for anything'
                                     />
-                                    <button type='submit'>
-                                        <i class="fa-solid fa-magnifying-glass">
+                                    <button>
+                                    <i class="fa-solid fa-magnifying-glass">
                                         </i></button>
                                 </div>
                             </li>

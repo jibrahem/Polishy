@@ -57,16 +57,13 @@ export const addPolishToCartThunk = (polish, cart) => async (dispatch) => {
 }
 
 export const updateCartThunk = (cart) => async (dispatch) => {
-    console.log('cart in the thunk', cart)
     const res = await csrfFetch(`/api/carts/${cart.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart),
     })
     if (res.ok) {
-        console.log('ressss', res)
         const updatedCart = await res.json();
-        console.log('res in thunk', updatedCart)
         dispatch(updateCart(updatedCart))
         return updatedCart
     } else {
@@ -114,14 +111,12 @@ const cartReducer = (state = initialState, action) => {
             return newState
         case UPDATE_CART:
             newState = { ...state, user: { ...state.user } }
-            console.log('action.user ', action)
             return { ...state, user: { ...action.cart } }
         case DELETE_POLISH:
             newState = { ...state, user: { ...state.user } }
             delete newState.user[action.cart]
             return newState
         case DELETE_CART:
-            console.log(action.cart.cart.Polishes)
             newState = { ...state, user: { ...state.user } }
             action.cart.cart.Polishes.forEach(polish => {
                 delete newState.user[polish.id]

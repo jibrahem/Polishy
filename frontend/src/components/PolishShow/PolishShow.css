@@ -2,6 +2,7 @@
     height: 600px;
     width: 600px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 main {
@@ -12,10 +13,11 @@ section {
     margin: 1rem;
 }
 
-.review-img img{
-height: 100px;
-width:100px;
-border-radius: 8px;
+.review-img img {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
 }
 
 .polish-box {
@@ -91,32 +93,54 @@ li {
     font-size: 15px;
 }
 
-.review{
+.review {
     margin-bottom: 1rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgb(219, 215, 215);
 }
 
-.review-text{
-    margin-top:.5rem;
+.review-text {
+    margin-top: .5rem;
     margin-bottom: .5rem;
 }
 
-.purchase{
+.purchase {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: .5rem;
 }
 
 
-.no-review{
+.no-review {
     font-family: 'Roboto', sans-serif;
     margin-left: 3rem;
     margin-bottom: 2rem;
 }
 
-.review-rating{
+.review-rating {
     display: flex;
     flex-direction: row;
-    gap:1rem
+    gap: 1rem
+}
+
+
+@media (max-width: 1100px) {
+    .polish-box img {
+        width: 550px;
+        height: 550px
+    }
+}
+
+@media (max-width: 1000px) {
+    .polish-box img {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 900px) {
+    .polish-box img {
+        width: 300px;
+        height: 300px
+    }
 }

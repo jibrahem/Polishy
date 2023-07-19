@@ -10,10 +10,8 @@ function ManageReviews() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const reviewObj = useSelector(state => state.review.user)
-    console.log('reviewobj', reviewObj)
 
     const list = Object.values(reviewObj)
-    console.log('list of reviews', list)
     const [showMenu, setShowMenu] = useState(false)
     const ulRef = useRef()
 

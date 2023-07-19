@@ -7,7 +7,6 @@ import './PolishList.css'
 function PolishList() {
     const dispatch = useDispatch()
     const polishObj = useSelector(state => state.polish.allPolishes)
-    console.log('polish object', polishObj)
     const polishList = Object.values(polishObj)
 
     useEffect(() => {

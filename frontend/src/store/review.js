@@ -31,7 +31,6 @@ export const deleteReview = (review) => ({
 })
 
 export const getPolishReviewsThunk = (polishId) => async (dispatch) => {
-    console.log('WE ARE IN THE THUNK')
     const res = await fetch(`/api/polishes/${polishId}/reviews`)
 
     if (res.ok) {

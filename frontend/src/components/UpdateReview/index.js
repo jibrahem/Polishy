@@ -26,7 +26,6 @@ const UpdateReview = ({ polish, review }) => {
             review: text,
             stars: stars
         }
-        console.log('new review', newReview)
         const errors = {}
 
         if (!text) {

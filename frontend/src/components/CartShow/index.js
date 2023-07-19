@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { getUserCartThunk, deletePolishThunk } from '../../store/cart'
 import './CartShow.css'
-import DeleteCart from '../DeleteCart'
 import UpdateCart from '../UpdateCart'
 import DeletePolish from '../DeletePolish'
 
@@ -15,8 +14,6 @@ const CartShow = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const cart = useSelector(state => state.cart.user.Carts)
-
-    console.log(cart)
 
     useEffect(() => {
         dispatch(getUserCartThunk())
@@ -50,8 +47,10 @@ const CartShow = () => {
             dispatch(getUserCartThunk())
             history.push('/')
         })
+
         return orderPlaced()
     }
+
     if (!cart) {
         return null
     }
@@ -63,7 +62,12 @@ const CartShow = () => {
     }
     if (!cart.length) {
         return (
-            <>Add something to your cart!</>
+            <div className='no-cart'>
+                <div className='cart-empty'>
+                    Your cart is empty.
+                </div>
+                <NavLink exact to={'/'}>Discover something unique to fill it up</NavLink>
+            </div>
         )
     }
     if (user) {
@@ -74,14 +78,13 @@ const CartShow = () => {
                         {cart.map(polish => (
                             <div key={polish.id} className='polish-items'>
                                 <div className='cart-pic'>
-                                    {console.log('carr', polish)}
                                     <li>
                                         <img src={polish.Polish.image} alt='polish'></img>
                                     </li>
                                 </div>
-
+                                {console.log(polish)}
                                 <div className='cart-quan'>
-                                    <li>{polish.description}</li>
+                                    <li>{polish.Polish.description}</li>
                                     <li>Quantity: {polish.quantity}</li>
                                     < UpdateCart
                                         cart={cart}

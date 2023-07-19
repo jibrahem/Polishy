@@ -9,9 +9,6 @@ ul {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
-}
 
 .wrapper {
     display: flex;
@@ -20,8 +17,34 @@ a {
 
 main ul {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     justify-content: space-evenly;
     justify-items: center;
+    margin-top: 2rem;
 
+}
+
+@media (max-width: 1370px) {
+    main ul {
+        grid: auto-flow/ 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 1100px) {
+    main ul {
+        grid: auto-flow/ 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    main ul {
+        grid: auto-flow/ 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+    main ul {
+        grid: auto-flow/ 1fr;
+    }
 }
