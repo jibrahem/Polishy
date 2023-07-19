@@ -8,6 +8,7 @@ function PolishList() {
     const dispatch = useDispatch()
     const polishObj = useSelector(state => state.polish.allPolishes)
     const polishList = Object.values(polishObj)
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(allPolishesThunk())
@@ -18,7 +19,14 @@ function PolishList() {
     }
     return (
         <>
-        <div className='top-text'>Discover fresh nail finds from creative sellers!</div>
+            <div className='top-text'>
+                {user &&
+                    <div className='user-name'>Welcome back, {user.firstName}!</div>
+                }
+                <div>
+                    Discover fresh nail finds from creative sellers!
+                </div>
+            </div>
             <div className='front-image'>
                 <ul>
                     <li>
@@ -55,10 +63,10 @@ function PolishList() {
                                 {(polish.avgRating === 3 || (polish.avgRating >= 2.5 && polish.avgRating < 3.5)) &&
                                     <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>({polish.Reviews.length})</div>
                                 }
-                                {(polish.avgRating === 4 || (polish.avgRating >= 3.5 && polish.avgRating < 4.5))&&
+                                {(polish.avgRating === 4 || (polish.avgRating >= 3.5 && polish.avgRating < 4.5)) &&
                                     <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i>({polish.Reviews.length})</div>
                                 }
-                                {(polish.avgRating === 5 || (polish.avgRating >= 4.5))&&
+                                {(polish.avgRating === 5 || (polish.avgRating >= 4.5)) &&
                                     <div><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>({polish.Reviews.length})</div>
                                 }
 
