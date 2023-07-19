@@ -49,9 +49,7 @@ function Navigation({ isLoaded }) {
                                     <input type="search" class='search'
                                         placeholder='   Search for anything'
                                     />
-                                    <button>
-                                    <i class="fa-solid fa-magnifying-glass">
-                                        </i></button>
+
                                 </div>
                             </li>
                             <div className='cart_profile'>
