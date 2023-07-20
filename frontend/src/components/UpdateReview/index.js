@@ -32,7 +32,7 @@ const UpdateReview = ({ polish, review }) => {
             errors.text = 'Review text is required'
         }
         if (text && text.length > 200) {
-            errors.review = 'Reviews can only have a max of 200 characters'
+            errors.text = 'Reviews can only have a max of 200 characters'
         }
         if (!stars) {
             errors.stars = "Star rating is required"

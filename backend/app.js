@@ -15,6 +15,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false })); // <-- Add this line
 app.use(express.json());
 
 // Security Middleware
