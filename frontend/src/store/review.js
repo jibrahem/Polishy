@@ -49,20 +49,23 @@ export const getAllUserReviewsThunk = () => async (dispatch) => {
     }
 }
 
-export const createReviewThunk = (review, polish, user) => async (dispatch) => {
+export const createReviewThunk = (newReview, polish, user) => async (dispatch) => {
+    const { image, review, stars } = newReview;
+    const formData = new FormData();
+    formData.append("stars", stars);
+    formData.append("review", review);
+
+    if(image) formData.append("image", image)
+
     const res = await csrfFetch(`/api/polishes/${polish.id}/reviews`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review),
+        body: formData
     })
     if (res.ok) {
-        const review = await res.json()
-        review.User = user
-        dispatch(createReview(review))
-        return review
-    } else {
-        const errors = await res.json()
-        return errors
+        const data = await res.json()
+        data.newReview.User = user;
+        dispatch(createReview(data.newReview))
+        return newReview;
     }
 }
 

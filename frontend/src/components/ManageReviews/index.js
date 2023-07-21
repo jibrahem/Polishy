@@ -14,7 +14,8 @@ function ManageReviews() {
     const list = Object.values(reviewObj)
     const [showMenu, setShowMenu] = useState(false)
     const ulRef = useRef()
-
+    console.log('review object', reviewObj)
+    console.log('review list', list)
     const reviewList = list.filter((review) => review.userId === user.id)
 
     useEffect(() => {

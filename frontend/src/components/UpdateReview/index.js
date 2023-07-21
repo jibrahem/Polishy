@@ -18,13 +18,12 @@ const UpdateReview = ({ polish, review }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const newReview = {
+        const updatedReview = {
             ...review,
             polishId: polish.id,
             userId: user.id,
-            image: image,
             review: text,
-            stars: stars
+            stars
         }
         const errors = {}
 
@@ -41,9 +40,9 @@ const UpdateReview = ({ polish, review }) => {
         if (Object.values(errors).length) {
             setErrors(errors)
         } else {
-            const updatedReview = await dispatch(updateReviewThunk(newReview))
+            const newReview = await dispatch(updateReviewThunk(updatedReview))
             await dispatch(getAllUserReviewsThunk())
-                .then(closeModal)
+            .then(closeModal)
         }
         if (!review) {
             return null

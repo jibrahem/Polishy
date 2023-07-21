@@ -3,13 +3,10 @@ import React, { useState, useEffect } from "react";
 import { getOnePolishThunk } from "../../store/polish";
 import './PolishShow.css'
 import { useDispatch, useSelector } from "react-redux";
-import ReviewShow from "../ReviewShow";
 import { getPolishReviewsThunk } from "../../store/review";
 import OpenModalMenuItem from '../../components/Navigation/OpenModalMenuItem'
-import DeleteReview from "../DeleteReview";
 import { useRef } from "react";
 import CreateReview from "../CreateReview";
-import UpdateReview from "../UpdateReview";
 import AddPolishCart from "../AddPolishCart";
 
 
@@ -21,6 +18,7 @@ const PolishShow = () => {
     const polish = useSelector(state => state.polish.singlePolish)
     const user = useSelector(state => state.session.user)
     const reviewObj = useSelector(state => state.review.polish)
+    console.log('review obj', reviewObj)
 
     const reviewList = Object.values(reviewObj)
 
@@ -56,6 +54,8 @@ const PolishShow = () => {
     if (!reviewList) {
         return null
     }
+
+    console.log('list of review', reviewList)
 
     const newReviewList = reviewList.filter(review => review.polishId === polish.id)
 
