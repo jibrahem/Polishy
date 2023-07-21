@@ -42,24 +42,34 @@ export const getPolishReviewsThunk = (polishId) => async (dispatch) => {
 
 export const getAllUserReviewsThunk = () => async (dispatch) => {
     const res = await csrfFetch('/api/reviews/current')
-
+    console.log('res', res)
     if (res.ok) {
         const userReviews = await res.json()
+        console.log('reviewsin the thunk', userReviews)
         dispatch(getUserReviews(userReviews))
     }
 }
 
-export const createReviewThunk = (review, polish, user) => async (dispatch) => {
+export const createReviewThunk = (review, polish, user, reviewImage) => async (dispatch) => {
     const res = await csrfFetch(`/api/polishes/${polish.id}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review),
     })
+    const formData = new FormData()
+    const newReview = await res.json()
+    newReview.User = user
     if (res.ok) {
-        const review = await res.json()
-        review.User = user
-        dispatch(createReview(review))
-        return review
+        for (let img of reviewImage) {
+            if (img) formData.append("image", img)
+            await csrfFetch(`/api/reviews/${newReview.id}/images`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(img),
+            })
+        }
+        dispatch(createReview(newReview))
+        return newReview
     } else {
         const errors = await res.json()
         return errors

@@ -41,6 +41,8 @@ function ManageReviews() {
         return null
     }
 
+    console.log('REVIEWL:IST', reviewList)
+
     return (
         <>
             <div className='manage-reviews'>
@@ -50,9 +52,11 @@ function ManageReviews() {
                         <div key={review.id} className='review'>
                             <div>{review.Polish.description}</div>
                             <div>{review.review}</div>
-                            {review.image &&
-                                <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            {review.ReviewImages?.length > 0 &&
+                                <div className="review-img"><img src={review.ReviewImages[0].url} alt='review'></img></div>
                             }
+                            {/* {review.ReviewImages.length === 0 &&
+                            <p></p>} */}
                             {review.stars === 1 &&
                                 <div>{review.stars} <i class="fa-sharp fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
                             }

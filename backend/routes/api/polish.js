@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Polish, Review } = require('../../db/models');
+const { User, Polish, Review, ReviewImage } = require('../../db/models');
 const router = express.Router();
 
 //GET ALL POLISHES
@@ -70,6 +70,10 @@ router.get('/:polishId/reviews', async (req, res) => {
             {
                 model: User,
                 attributes: ['id', 'firstName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
             }
         ]
     });

@@ -20,7 +20,9 @@ const PolishShow = () => {
 
     const polish = useSelector(state => state.polish.singlePolish)
     const user = useSelector(state => state.session.user)
+    const nothing = useSelector(state => console.log('nothing', state))
     const reviewObj = useSelector(state => state.review.polish)
+    console.log('review object', reviewObj)
 
     const reviewList = Object.values(reviewObj)
 
@@ -67,6 +69,7 @@ const PolishShow = () => {
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     })
 
+    console.log('newrevie wlsit', newReviewList)
 
     const [userReview] = newReviewList.filter(review => review.userId === user?.id)
 
@@ -153,10 +156,11 @@ const PolishShow = () => {
                             }
                             <div className="review-text">{review.review}</div>
                             <div className="purchase">Purchased item: {polish.description}</div>
-                            {review.image &&
-                                <div className="review-img"><img src={review.image} alt='review'></img></div>
+                            {review?.ReviewImages?.length > 0 &&
+                                <div className="review-img"><img src={review.ReviewImages[0].url} alt='review'></img></div>
                             }
                             <div className="name-date">
+                                {console.log('review name', review)}
                                 <div className="review-name">{review.User?.firstName}</div>
                                 {review.createdAt.split('-')[1] === '01' &&
                                     <div className="date"> Jan {review.createdAt.split('-')[2][0]}{review.createdAt.split('-')[2][1]}, {review.createdAt.split('-')[0]}

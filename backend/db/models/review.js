@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Review.belongsTo(models.Polish, { foreignKey: 'polishId' });
       Review.belongsTo(models.User, { foreignKey: 'userId' });
+      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId', hooks: true, onDelete: 'CASCADE' });
+
     }
   }
   Review.init({
@@ -34,10 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
-    image: {
-      allowNull: true,
-      type: DataTypes.STRING
-    }
+    // image: {
+    //   allowNull: true,
+    //   type: DataTypes.STRING
+    // }
   }, {
     sequelize,
     modelName: 'Review',

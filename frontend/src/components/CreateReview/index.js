@@ -12,27 +12,31 @@ const CreateReview = ({ polish }) => {
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
+    const [image, setImage] = useState(null)
     const [starRating, setStarRating] = useState()
-    const [image, setImage] = useState('')
     const [errors, setErrors] = useState({})
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
+
+    const ReviewImage = [
+        { url: image }
+    ]
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const newReview = {
             polishId: polish.id,
             userId: user.id,
-            image: image,
             review: review,
-            stars: stars
+            stars: stars,
+            ReviewImage
         }
         const errors = {}
 
         if (!review) {
             errors.review = 'Review text is required'
         }
-        if(review && review.length > 200){
+        if (review && review.length > 200) {
             errors.review = 'Reviews can only have a max of 200 characters'
         }
 
@@ -40,15 +44,13 @@ const CreateReview = ({ polish }) => {
             errors.stars = "Star rating is required"
         }
 
-        if (image && !(image.endsWith('.png') || image.endsWith('.jpg') || image.endsWith('.jpeg'))) {
-            errors.image = 'Image URL must end with .png, .jpg, or .jpeg'
-        }
 
         if (Object.values(errors).length) {
             setErrors(errors)
         } else {
-            const addReview = await dispatch(createReviewThunk(newReview, polish, user))
+            const addReview = await dispatch(createReviewThunk(newReview, polish, user, ReviewImage))
             await dispatch(getOnePolishThunk(polish.id))
+
                 .then(closeModal)
         }
         if (!review) {
@@ -58,6 +60,11 @@ const CreateReview = ({ polish }) => {
             return null
         }
     }
+
+    const updateFiles = e => {
+        const file = e.target.files[0];
+        if (file) setImage(file);
+    };
 
     const setStar = (num) => {
         if (num <= stars) {
@@ -115,12 +122,14 @@ const CreateReview = ({ polish }) => {
                         placeholder='Leave your review'
                     />
 
-                    <input type='text'
-                        placeholder='Want to add an image'
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                    >
-                    </input>
+                    <label>
+                        Image to Upload
+                        <input
+                            type="file"
+                            accept=".jpg, .jpeg, .png"
+                            multiple
+                            onChange={updateFiles} />
+                    </label>
                     <div className='errors'>{errors.image}</div>
                     <button type='submit'>Submit Review</button>
                 </form>

@@ -3,9 +3,9 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Polish, Review } = require('../../db/models');
+const { User, Polish, Review, ReviewImage } = require('../../db/models');
 const router = express.Router();
 
 
@@ -22,17 +22,58 @@ router.get('/current', requireAuth, async (req, res) => {
             {
                 model: Polish,
                 attributes: { exclude: ['updatedAt', 'createdAt'] }
-            }
+            },
+
+            {
+                model: ReviewImage,
+            },
         ]
     })
+
 
     let reviewList = [];
     for (let i = 0; i < Reviews.length; i++) {
         const review = Reviews[i]
         reviewList.push(review.toJSON())
     }
-    return res.json({ Reviews: reviewList })
+    return res.json({Reviews: reviewList})
 })
+
+//POST an image for a review
+router.post('/:reviewId/images', singleMulterUpload("image"), requireAuth, async (req, res) => {
+    const { user } = req;
+    const url = req.file ?
+        await singleFileUpload({ file: req.file, public: true }) :
+        null;
+
+    const review = await Review.findByPk(req.params.reviewId);
+
+    if (!review) {
+        return res.status(404).json({
+            message: "Review couldn't be found"
+        });
+    }
+    const count = await ReviewImage.count({
+        where: { reviewId: review.id }
+    });
+    if (review.userId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden"
+        });
+    }
+    if (count > 1) {
+        return res.status(403).json({
+            message: "Maximum number of images for this resource was reached"
+        });
+    }
+
+    const reviewImage = await ReviewImage.create({
+        url,
+        reviewId: review.id,
+    });
+
+    return res.json({reviewImage});
+});
 
 //UPDATE a users review
 router.put('/:reviewId', requireAuth, async (req, res) => {
@@ -63,13 +104,13 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
             errors: errors
         })
     }
-    if(review){
+    if (review) {
         editReview.review = review;
     }
     if (image) {
         editReview.image = image;
     }
-    if(stars){
+    if (stars) {
         editReview.stars = stars;
     }
     await editReview.save()
@@ -78,15 +119,15 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
 
 //DELETE a users review
-router.delete('/:reviewId', requireAuth, async (req, res) =>{
-    const {user} = req;
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    const { user } = req;
     const review = await Review.findByPk(req.params.reviewId);
-    if(!review){
+    if (!review) {
         res.status(404).json({
             message: "Review couldn't be found"
         })
     }
-    if(review.userId !== user.id){
+    if (review.userId !== user.id) {
         return res.status(403).json({
             message: "Forbidden"
         })
