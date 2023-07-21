@@ -1,7 +1,7 @@
 const express = require('express')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User, Polish, Review } = require('../../db/models');
 const router = express.Router();
@@ -77,8 +77,11 @@ router.get('/:polishId/reviews', async (req, res) => {
 })
 
 //POST a review for a polish
-router.post('/:polishId/reviews', requireAuth, async (req, res) => {
-    const { review, stars, image } = req.body;
+router.post('/:polishId/reviews', singleMulterUpload("image"), requireAuth, async (req, res) => {
+    const { review, stars } = req.body;
+    const image = req.file ?
+        await singleFileUpload({ file: req.file, public: true }) :
+        '';
     const { user } = req
     const polish = await Polish.findByPk(req.params.polishId);
     if (!polish) {
@@ -106,7 +109,7 @@ router.post('/:polishId/reviews', requireAuth, async (req, res) => {
         errors.stars = "Stars rating is required";
     }
     if (Object.values(errors).length !== 0) {
-        return res.status(400), json({
+        return res.status(400).json({
             message: 'Bad Request',
             errors: errors
         })
@@ -114,11 +117,11 @@ router.post('/:polishId/reviews', requireAuth, async (req, res) => {
     const newReview = await Review.create({
         polishId: polish.id,
         userId: user.id,
-        image: image,
         review,
-        stars
+        stars: Number(stars),
+        image,
     })
-    return res.status(201).json(newReview)
+    return res.json({newReview})
 })
 
 
