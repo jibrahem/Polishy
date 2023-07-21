@@ -70,6 +70,11 @@ const CartShow = () => {
             </div>
         )
     }
+
+    const sortedCart = cart.sort((a, b) => {
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    })
+
     if (user) {
         if (cart.length) {
             return (

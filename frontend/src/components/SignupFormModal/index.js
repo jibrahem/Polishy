@@ -53,7 +53,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
-                {errors.email && <p>{errors.email}</p>}
+                {errors.email && <div className="errors">{errors.email}</div>}
                 <label>
                     First Name
                     <input
@@ -63,7 +63,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
-                {errors.firstName && <p>{errors.firstName}</p>}
+                {errors.firstName && <div className="errors">{errors.firstName}</div>}
                 <label>
                     Password
                     <input
@@ -84,7 +84,7 @@ function SignupFormModal() {
                     />
                 </label>
                 {errors.confirmPassword && (
-                    <p>{errors.confirmPassword}</p>
+                    <div className="errors">{errors.confirmPassword}</div>
                 )}
                 <div className="submit-button">
                 <button type="submit">Register</button>
