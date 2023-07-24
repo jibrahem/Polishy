@@ -32,6 +32,14 @@ function App() {
         <Route exact path={'/'}>
           <PolishList />
         </Route>
+        <Route>
+          <div className='no-cart'>
+            <div className="cart-empty">
+              404 Error: 
+              Page Not Found
+            </div>
+          </div>
+        </Route>
       </Switch>}
     </>
   );

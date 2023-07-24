@@ -42,6 +42,10 @@ function ManageReviews() {
         return null
     }
 
+    const sortedCart = reviewList.sort((a, b) => {
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    })
+
     return (
         <>
             <div className='manage-reviews'>
