@@ -47,7 +47,6 @@ const CartShow = () => {
             dispatch(getUserCartThunk())
             history.push('/')
         })
-
         return orderPlaced()
     }
 
@@ -87,7 +86,6 @@ const CartShow = () => {
                                         <img src={polish.Polish.image} alt='polish'></img>
                                     </li>
                                 </div>
-                                {console.log(polish)}
                                 <div className='cart-quan'>
                                     <li>{polish.Polish.description}</li>
                                     <li>Quantity: {polish.quantity}</li>
@@ -103,12 +101,10 @@ const CartShow = () => {
                                     <li>(${polish.Polish.price} each)</li>
                                 </div>
                             </div>
-
                         ))}
                     </ul>
                     <div className='cart-purchase'>
                         <div className='total-cost'>
-
                             <div className='bold'>Item(s) total: </div>
                             <div>${totalPrice(cart).toFixed(2)}</div>
                         </div>

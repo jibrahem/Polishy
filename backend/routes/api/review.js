@@ -63,13 +63,13 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
             errors: errors
         })
     }
-    if(review){
+    if (review) {
         editReview.review = review;
     }
     if (image) {
         editReview.image = image;
     }
-    if(stars){
+    if (stars) {
         editReview.stars = stars;
     }
     await editReview.save()
@@ -78,15 +78,15 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
 
 //DELETE a users review
-router.delete('/:reviewId', requireAuth, async (req, res) =>{
-    const {user} = req;
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    const { user } = req;
     const review = await Review.findByPk(req.params.reviewId);
-    if(!review){
+    if (!review) {
         res.status(404).json({
             message: "Review couldn't be found"
         })
     }
-    if(review.userId !== user.id){
+    if (review.userId !== user.id) {
         return res.status(403).json({
             message: "Forbidden"
         })
