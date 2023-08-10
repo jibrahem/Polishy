@@ -66,6 +66,11 @@ a {
     color: black;
 }
 
+/* .background{
+    background-color: antiquewhite;
+    height: 200px;
+} */
+
 @media (max-width: 1100px) {
     .front-image li {
         gap: 3rem;

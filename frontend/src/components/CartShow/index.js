@@ -6,7 +6,7 @@ import { NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { getUserCartThunk, deletePolishThunk } from '../../store/cart'
 import './CartShow.css'
 import UpdateCart from '../UpdateCart'
-import DeletePolish from '../DeletePolish'
+import DeletePolishFromCart from '../DeletePolishFromCart'
 
 
 const CartShow = () => {
@@ -92,7 +92,7 @@ const CartShow = () => {
                                     < UpdateCart
                                         cart={cart}
                                         polish={polish} />
-                                    <DeletePolish
+                                    <DeletePolishFromCart
                                         cart={cart}
                                         polish={polish} />
                                 </div>

@@ -20,7 +20,7 @@ module.exports = {
     */
     return queryInterface.bulkInsert(options, [
       {
-        userId: 1,
+        userId: 3,
         description: 'Barbie Girl: Pink Nail Polish Hand Mixed',
         price: 10.99,
         image: 'https://i.etsystatic.com/18778792/r/il/bee0f5/4811384291/il_1588xN.4811384291_5wb2.jpg'

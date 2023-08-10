@@ -19,10 +19,6 @@
 }
 
 .profile-dropdown a {
-    height: 2rem;
-    width: 4.2rem;
-    border-radius: 30px;
-    text-align: center;
     text-decoration: none;
 }
 
@@ -138,12 +134,10 @@ nav {
 }
 
 .signout button {
-    height: 2rem;
-    width: 4rem;
-    border-radius: 30px;
     background-color: transparent;
     border: none;
     font-family: 'Roboto', sans-serif;
+    font-size: 15px;
 }
 
 .signout button:hover {

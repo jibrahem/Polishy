@@ -72,6 +72,11 @@ function ProfileButton({ user }) {
                             </NavLink>
                         </li>
                         <li>
+                            <NavLink exact to='/polishes/current'>
+                                Polishes
+                            </NavLink>
+                        </li>
+                        <li>
                             <div className="signout">
                                 <button onClick={logout}>Sign Out</button>
                             </div>

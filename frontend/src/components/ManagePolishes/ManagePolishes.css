@@ -1,0 +1,16 @@
+.manage-polishes {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.manage-polishes button {
+    margin-top: 1rem;
+    border: 2px solid black;
+    height: 3rem;
+    width: 200px;
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    font-size: 15px
+}

@@ -28,7 +28,6 @@ const CreateReview = ({ polish }) => {
             stars: Number(stars)
         }
 
-        console.log('new review', newReview)
         const errors = {}
 
         if (!text) {

@@ -1,0 +1,50 @@
+.post-polish form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-polish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 3rem;
+}
+
+.post-polish h1 {
+    margin-bottom: 1rem;
+}
+
+.post-polish input {
+    font-family: 'Roboto', sans-serif;
+}
+
+.post-polish h3 {
+    font-size: 18px;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.post-polish textarea {
+    width: 385px;
+    height: 4rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.post-polish button {
+    margin-top: 1rem;
+    border: 2px solid black;
+    height: 3rem;
+    width: 200px;
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    align-items: center;
+}
+
+.create-button{
+    display: flex;
+    justify-content: center;
+}

@@ -19,12 +19,14 @@ function PolishList() {
     }
     return (
         <>
-            <div className='top-text'>
-                {user &&
-                    <div className='user-name'>Welcome back, {user.firstName}!</div>
-                }
-                <div>
-                    Discover fresh nail finds from creative sellers!
+            <div className='background'>
+                <div className='top-text'>
+                    {user &&
+                        <div className='user-name'>Welcome back, {user.firstName}!</div>
+                    }
+                    <div>
+                        Discover fresh nail finds from creative sellers!
+                    </div>
                 </div>
             </div>
             <div className='front-image'>

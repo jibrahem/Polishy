@@ -18,6 +18,7 @@ const PolishShow = () => {
     const polish = useSelector(state => state.polish.singlePolish)
     const user = useSelector(state => state.session.user)
     const reviewObj = useSelector(state => state.review.polish)
+    console.log('polish show', polish)
     console.log('review obj', reviewObj)
 
     const reviewList = Object.values(reviewObj)
@@ -60,6 +61,10 @@ const PolishShow = () => {
     const newReviewList = reviewList.filter(review => review.polishId === polish.id)
 
     if (!newReviewList) {
+        return null
+    }
+
+    if(!polish.Seller) {
         return null
     }
 
@@ -119,7 +124,7 @@ const PolishShow = () => {
                     }
                 </div>
                 <div className="add-review">
-                    {!userReview && user &&
+                    {!userReview && user && polish.Seller.id !== user.id &&
                         <OpenModalMenuItem
                             buttonText="Add Review"
                             onItemClick={closeMenu}

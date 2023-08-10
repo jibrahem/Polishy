@@ -27,6 +27,31 @@ router.get('/', async (req, res) => {
     return res.json(allPolishes)
 })
 
+
+//GET USERS POLISHES
+router.get('/current', requireAuth, async (req, res) => {
+    const { user } = req;
+    const polishes = await Polish.findAll({
+        where: { userId: user.id },
+        include: [
+            { model: Review }
+        ]
+    })
+    let allPolishes = [];
+    polishes.forEach(polish => {
+        allPolishes.push(polish.toJSON());
+    });
+    allPolishes.forEach(polish => {
+        let sum = 0;
+        polish.Reviews.forEach(review => {
+            sum += review.stars;
+        });
+        polish.avgRating = sum / polish.Reviews.length;
+    });
+    return res.json({ allPolishes })
+})
+
+
 //GET POLISH BY POLISH ID
 router.get('/:polishId', async (req, res) => {
     const polish = await Polish.findByPk(req.params.polishId, {
@@ -54,6 +79,119 @@ router.get('/:polishId', async (req, res) => {
     polish.dataValues.avgRating = sum / polish.Reviews.length;
 
     return res.json(polish)
+})
+
+
+//POST A NEW POLISH
+
+router.post('/', singleMulterUpload("image"), requireAuth, async (req, res) => {
+    const { description, price } = req.body
+
+    const image = req.file ?
+        await singleFileUpload({ file: req.file, public: true }) :
+        '';
+
+    const { user } = req;
+
+    const errors = {}
+
+    if (!description) {
+        errors.description = 'Description required'
+    }
+
+    if (!price) {
+        errors.price = "Price is required"
+    }
+
+    if (!image) {
+        errors.image = "Image is required"
+    }
+
+    if (Object.values(errors).length !== 0) {
+        return res.status(400), json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+
+    const polish = await Polish.create({
+        userId: user.id,
+        description: description,
+        price: price,
+        image: image,
+    })
+
+    polish.price = Number(polish.price)
+    return res.status(201).json(polish)
+})
+
+//UPDATE POLISH
+
+router.put('/:polishId', requireAuth, async (req, res) => {
+    const { user } = req;
+    const { description, price } = req.body;
+    const polish = await Polish.findByPk(req.params.polishId);
+    if (!polish) {
+        return res.status(404).json({
+            message: "Polish couldn't be found"
+        })
+    }
+
+    if (polish.userId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    }
+
+    const errors = {}
+
+    if (!description) {
+        errors.description = 'Description required'
+    }
+
+    if (!price) {
+        errors.price = "Price is required"
+    }
+
+    if (Object.values(errors).length !== 0) {
+        return res.status(400), json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+
+    if (description) {
+        polish.description = description
+    }
+
+    if (price) {
+        polish.price = price
+    }
+
+    await polish.save();
+
+    return res.json(polish)
+})
+
+// DELETE USERS POLISH
+
+router.delete('/:polishId', requireAuth, async (req, res) => {
+    const { user } = req;
+    const polish = await Polish.findByPk(req.params.polishId);
+    if (!polish) {
+        return res.status(404).json({
+            message: "Polish couldn't be found"
+        })
+    }
+    if (polish.userId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    }
+    await polish.destroy()
+    return res.json({
+        message: "Successfully deleted"
+    })
 })
 
 //GET REVIEWS FOR A CERTAIN POLISH
@@ -121,7 +259,7 @@ router.post('/:polishId/reviews', singleMulterUpload("image"), requireAuth, asyn
         stars: Number(stars),
         image,
     })
-    return res.json({newReview})
+    return res.json({ newReview })
 })
 
 
