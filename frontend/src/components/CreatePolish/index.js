@@ -40,7 +40,6 @@ const CreatePolish = () => {
             setErrors(errors)
         } else {
             const createdPolish = await dispatch(createPolishThunk(newPolish))
-            console.log('createwd polis', createdPolish)
             history.push(`/polishes/${createdPolish.id}`)
         }
     }

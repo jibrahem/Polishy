@@ -74,7 +74,6 @@ export const createPolishThunk = (newPolish) => async (dispatch) => {
     formData.append("price", price);
 
     if (image) formData.append("image", image);
-    console.log('formdata', formData)
 
     const res = await csrfFetch('/api/polishes', {
         method: 'POST',
